@@ -1,79 +1,51 @@
-from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-import time
+import sys
+from PyQt5 import QtWidgets, QtGui
+import os
+import traceback
+import datetime
 
-class WhatsApp:
+from frontend.py.tela_principal.tela_principal import Ui_Tela_Principal
+from frontend.py.conexao.tela_conexao import Ui_Tela_Conexao
+
+from backend.gerenciamento_telas import Gerenciamento_Telas
+from backend.whatsapp import WhatsApp
+from backend.tela_principal.principal import Principal
+from backend.conexao.conexao import Conexao
+
+
+class MainWindow(QtWidgets.QMainWindow):
     def __init__(self):
-        self.navegador = self.incia_navegador()
-        self.monitora_qrcode()   
+        super().__init__()
+        self.configura_diretorio_aplicacao()
+        self.telas = Gerenciamento_Telas(self)
+        self.api = WhatsApp()
+        self.setCentralWidget(QtWidgets.QWidget())  
+        self.centralWidget().setLayout(QtWidgets.QVBoxLayout())  
+        self.carrega_tela_principal()
 
-    def incia_navegador(self):
-        chrome_options = Options()
-        chrome_options.add_argument("--headless=new")
-        servico = Service(ChromeDriverManager().install())
-        navegador = webdriver.Chrome(service=servico, options=chrome_options)
-        #navegador.maximize_window()
-        navegador.get("https://web.whatsapp.com")
-        return navegador
+    def configura_diretorio_aplicacao(self):
+        diretorio = os.path.join(os.getenv('APPDATA'), 'API WhatsApp')
+        if not os.path.exists(diretorio):
+            os.makedirs(diretorio)    
 
-    def monitora_qrcode(self):
-        import base64
-        wait = WebDriverWait(self.navegador, 10)
-        canvas = wait.until(EC.presence_of_element_located((By.TAG_NAME, "canvas")))
-        qr_code_anterior = None
-        while True:
-            try:
-                canvas = self.navegador.find_element(By.TAG_NAME, "canvas")
-                qr_code_atual = self.coleta_qrcode()
-                if qr_code_atual!= qr_code_anterior:
-                    with open("imagem_qr_code.png", "wb") as f:
-                        f.write(base64.b64decode(qr_code_atual))
-                    qr_code_anterior = qr_code_atual
-                    print("QR CODE ALTERADO")
-                time.sleep(1)
-            except Exception as e:            
-                self.verifica_conexao(e)
-                break
-    
-    def coleta_qrcode(self):        
-        wait = WebDriverWait(self.navegador, 10)
-        canvas = self.navegador.find_element(By.TAG_NAME, "canvas")
-        image_data = self.navegador.execute_script("""
-                var canvas = arguments[0];
-                return canvas.toDataURL('image/png').substring(22);  // Remover o prefixo 'data:image/png;base64,'
-            """, canvas)
-
-        return image_data
+    def carrega_tela_principal(self):
+        self.telas.carrega_telas(Ui_Tela_Principal, backend=Principal, api=self.api)
+        self.ui = self.telas.ui
+        self.ui.botao_home.clicked.connect(self.carrega_tela_principal)
+        #self.ui.botao_contatos.clicked.connect(print("Tela Contatos"))
+        self.ui.botao_conexao.clicked.connect(self.carrega_tela_conexao)
         
-    def verifica_conexao(self, e:KeyError):
-        wait = WebDriverWait(self.navegador, 10)
-        elementos = wait.until(EC.presence_of_element_located((By.TAG_NAME, "h1")))
-        elementos = self.navegador.find_elements(By.TAG_NAME, "h1")
-        elementos = [(elemento.text).lower() for elemento in elementos]
-        if "chats" in elementos:
-            print("CONECTADO")
-        else:
-            print(e)
-            
-    def pesquisa_usuario(self, identificador):    
-        elemento = self.navegador.find_element(By.CLASS_NAME, 'selectable-text')    
-        pesquisa = elemento.text
-        if pesquisa:
-            elemento.send_keys(Keys.BACKSPACE * len(pesquisa))
-            
-        elemento.send_keys(identificador, Keys.ENTER)
+    def carrega_tela_conexao(self):
+        self.telas.carrega_telas(Ui_Tela_Conexao, backend=Conexao,api=self.api)
+        self.ui = self.telas.ui
+        self.ui.botao_home.clicked.connect(self.carrega_tela_principal)
+        #self.ui.botao_contatos.clicked.connect(print("Tela Contatos"))
+        self.ui.botao_conexao.clicked.connect(self.carrega_tela_conexao)
+        
 
-    def envia_mensagem(self, mensagem):
-        elemento = self.navegador.find_elements(By.CLASS_NAME, "selectable-text")[-1]
-        elemento.send_keys(mensagem, Keys.ENTER)
-            
-if __name__ == "__main__":
-    api = WhatsApp()
-    api.pesquisa_usuario("Meu amor")
-    api.envia_mensagem("Mensagem de teste")
+if __name__ == '__main__':
+    app = QtWidgets.QApplication(sys.argv)
+    window = MainWindow()
+    window.show()
+    
+    sys.exit(app.exec())

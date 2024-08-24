@@ -1,0 +1,12 @@
+<RCC>
+  <qresource>
+    <file>icons/home.svg</file>
+    <file>icons/conectado.svg</file>
+    <file>icons/conectado_hover.svg</file>
+    <file>icons/nao_conectado.svg</file>
+    <file>icons/nao_conectado_hover.svg</file>
+    <file>icons/contatos.svg</file>
+    <file>icons/contatos_hover.svg</file>
+    <file>icons/home_hover.svg</file>
+  </qresource>
+</RCC>
