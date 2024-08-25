@@ -28,12 +28,16 @@ class WhatsApp:
         return navegador
 
     def monitora_qrcode(self, ui):        
-        import base64  
-        canvas = self.wait.until(EC.presence_of_element_located((By.TAG_NAME, "canvas")))  
+        import base64          
+        if self.conectado:
+            ui.qrcode.setText("VOCÊ JÁ SE CONECTOU")
+            return 
         if self.qr_code_anterior:
+            print("Tem qr code anterior")
             pixmap = QPixmap(os.path.join(self.diretorio, "imagem_qr_code.png"))
             ui.qrcode.setPixmap(pixmap)
-            ui.qrcode.repaint()        
+            ui.qrcode.repaint()   
+        canvas = self.wait.until(EC.presence_of_element_located((By.TAG_NAME, "canvas")))       
         while True:
             try:
                 canvas = self.navegador.find_element(By.TAG_NAME, "canvas")
@@ -87,7 +91,14 @@ class WhatsApp:
                     break
             except Exception as e:                
                 pass
-            
+    
+    def __del__(self):
+        if self.navegador:
+            self.fecha_navegador()                  
+    
+    def fecha_navegador(self):
+        self.navegador.quit()
+    
 if __name__ == "__main__":
     api = WhatsApp()    
     api.pesquisa_usuario("Gabriel henrique Rodrigues")    

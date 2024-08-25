@@ -21,4 +21,7 @@ class Gerenciamento_Telas(QtWidgets.QWidget):
             self.app.showMaximized()
             
         if backend:
-            self.backend = backend(self.ui, api)           
+            if api:
+                self.backend = backend(self.ui, api)  
+            else:
+                self.backend = backend(self.ui)         

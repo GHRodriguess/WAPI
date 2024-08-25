@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'frontend/ui/conexao/conecta_whatsapp.ui'
+# Form implementation generated from reading ui file 'frontend/ui/contatos/contatos.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.9
 #
@@ -11,20 +11,20 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_Tela_Conexao(object):
-    def setupUi(self, Tela_Conexao):
-        Tela_Conexao.setObjectName("Tela_Conexao")
-        Tela_Conexao.setWindowModality(QtCore.Qt.NonModal)
-        Tela_Conexao.setEnabled(True)       
-        Tela_Conexao.setMouseTracking(False)
-        Tela_Conexao.setFocusPolicy(QtCore.Qt.NoFocus)
-        Tela_Conexao.setStyleSheet("QMainWindow{\n"
+class Ui_Tela_Contatos(object):
+    def setupUi(self, Tela_Contatos):
+        Tela_Contatos.setObjectName("Tela_Contatos")
+        Tela_Contatos.setWindowModality(QtCore.Qt.NonModal)
+        Tela_Contatos.setEnabled(True)        
+        Tela_Contatos.setMouseTracking(False)
+        Tela_Contatos.setFocusPolicy(QtCore.Qt.NoFocus)
+        Tela_Contatos.setStyleSheet("QMainWindow{\n"
 "background-color: rgb(50,50,50);\n"
 "}")
-        Tela_Conexao.setToolButtonStyle(QtCore.Qt.ToolButtonIconOnly)
-        Tela_Conexao.setDocumentMode(False)
-        Tela_Conexao.setTabShape(QtWidgets.QTabWidget.Rounded)
-        self.centralwidget = QtWidgets.QWidget(Tela_Conexao)
+        Tela_Contatos.setToolButtonStyle(QtCore.Qt.ToolButtonIconOnly)
+        Tela_Contatos.setDocumentMode(False)
+        Tela_Contatos.setTabShape(QtWidgets.QTabWidget.Rounded)
+        self.centralwidget = QtWidgets.QWidget(Tela_Contatos)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
         self.verticalLayout.setObjectName("verticalLayout")
@@ -116,36 +116,13 @@ class Ui_Tela_Conexao(object):
         self.frame_2.setObjectName("frame_2")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.frame_2)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
-        self.label = QtWidgets.QLabel(self.frame_2)
-        self.label.setMaximumSize(QtCore.QSize(16777215, 75))
-        font = QtGui.QFont()
-        font.setFamily("Garamond")
-        font.setPointSize(20)
-        font.setBold(True)
-        self.label.setFont(font)
-        self.label.setObjectName("label")
-        self.verticalLayout_2.addWidget(self.label)
-        self.qrcode = QtWidgets.QLabel(self.frame_2)
-        font = QtGui.QFont()
-        font.setFamily("Garamond")
-        font.setPointSize(20)
-        font.setBold(True)
-        self.qrcode.setFont(font)
-        self.qrcode.setStyleSheet("QLabel{\n"
-"color: rgb(255,255,255);\n"
-"}")
-        self.qrcode.setAlignment(QtCore.Qt.AlignCenter)
-        self.qrcode.setObjectName("qrcode")
-        self.verticalLayout_2.addWidget(self.qrcode)
         self.verticalLayout.addWidget(self.frame_2)
-        Tela_Conexao.setCentralWidget(self.centralwidget)
+        Tela_Contatos.setCentralWidget(self.centralwidget)
 
-        self.retranslateUi(Tela_Conexao)
-        QtCore.QMetaObject.connectSlotsByName(Tela_Conexao)
+        self.retranslateUi(Tela_Contatos)
+        QtCore.QMetaObject.connectSlotsByName(Tela_Contatos)
 
-    def retranslateUi(self, Tela_Conexao):
+    def retranslateUi(self, Tela_Contatos):
         _translate = QtCore.QCoreApplication.translate
-        Tela_Conexao.setWindowTitle(_translate("Tela_Conexao", "API WhatsApp"))
-        self.label.setText(_translate("Tela_Conexao", "<html><head/><body><p align=\"center\"><span style=\" color:#ffffff;\">ESCANEIE O QR CODE</span></p></body></html>"))
-        self.qrcode.setText(_translate("Tela_Conexao", "<html><head/><body><p align=\"center\"><span style=\" color:#ffffff;\"><br/></span></p></body></html>"))
-import frontend.ui.conexao.icons_rc as icons_rc
+        Tela_Contatos.setWindowTitle(_translate("Tela_Contatos", "API WhatsApp"))
+import frontend.ui.contatos.icons_rc as icons_rc
