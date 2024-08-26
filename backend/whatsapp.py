@@ -34,7 +34,7 @@ class WhatsApp:
             return 
         if self.qr_code_anterior:
             print("Tem qr code anterior")
-            pixmap = QPixmap(os.path.join(self.diretorio, "imagem_qr_code.png"))
+            pixmap = QPixmap(os.path.join(self.diretorio,"imagem_qr_code.png"))
             ui.qrcode.setPixmap(pixmap)
             ui.qrcode.repaint()   
         canvas = self.wait.until(EC.presence_of_element_located((By.TAG_NAME, "canvas")))       
@@ -43,7 +43,7 @@ class WhatsApp:
                 canvas = self.navegador.find_element(By.TAG_NAME, "canvas")
                 qr_code_atual = self.coleta_qrcode()
                 if qr_code_atual!= self.qr_code_anterior:
-                    with open(os.path.join(self.diretorio, "imagem_qr_code.png"), "wb") as f:
+                    with open(os.path.join(self.diretorio,"imagem_qr_code.png"), "wb") as f:
                         f.write(base64.b64decode(qr_code_atual))
                     self.qr_code_anterior = qr_code_atual
                     print("QR Code alterado")

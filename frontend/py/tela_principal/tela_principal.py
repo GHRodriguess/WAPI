@@ -82,8 +82,18 @@ class Ui_Tela_Principal(object):
         self.botao_contatos.setIconSize(QtCore.QSize(40, 40))
         self.botao_contatos.setObjectName("botao_contatos")
         self.horizontalLayout.addWidget(self.botao_contatos)
-        spacerItem2 = QtWidgets.QSpacerItem(583, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        spacerItem2 = QtWidgets.QSpacerItem(10, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem2)
+        self.label = QtWidgets.QLabel(self.frame)
+        font = QtGui.QFont()
+        font.setFamily("Garamond")
+        font.setPointSize(15)
+        font.setBold(True)
+        self.label.setFont(font)
+        self.label.setObjectName("label")
+        self.horizontalLayout.addWidget(self.label)
+        spacerItem3 = QtWidgets.QSpacerItem(583, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout.addItem(spacerItem3)
         self.botao_conexao = QtWidgets.QPushButton(self.frame)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
@@ -123,4 +133,5 @@ class Ui_Tela_Principal(object):
     def retranslateUi(self, Tela_Principal):
         _translate = QtCore.QCoreApplication.translate
         Tela_Principal.setWindowTitle(_translate("Tela_Principal", "API WhatsApp"))
+        self.label.setText(_translate("Tela_Principal", "<html><head/><body><p><span style=\" color:#ffffff;\">MENSAGENS</span></p></body></html>"))
 import frontend.ui.tela_principal.icons_rc as icons_rc

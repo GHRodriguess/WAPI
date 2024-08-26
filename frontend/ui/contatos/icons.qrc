@@ -1,5 +1,9 @@
 <RCC>
   <qresource>
+    <file>icons/adiciona_contato.svg</file>
+    <file>icons/adiciona_contato_hover.svg</file>
+    <file>icons/remove_contato.svg</file>
+    <file>icons/remove_contato_hover.svg</file>
     <file>icons/conectado.svg</file>
     <file>icons/conectado_hover.svg</file>
     <file>icons/contatos.svg</file>

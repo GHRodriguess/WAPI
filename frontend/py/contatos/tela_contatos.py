@@ -82,8 +82,18 @@ class Ui_Tela_Contatos(object):
         self.botao_contatos.setIconSize(QtCore.QSize(40, 40))
         self.botao_contatos.setObjectName("botao_contatos")
         self.horizontalLayout.addWidget(self.botao_contatos)
-        spacerItem2 = QtWidgets.QSpacerItem(583, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        spacerItem2 = QtWidgets.QSpacerItem(10, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem2)
+        self.label = QtWidgets.QLabel(self.frame)
+        font = QtGui.QFont()
+        font.setFamily("Garamond")
+        font.setPointSize(15)
+        font.setBold(True)
+        self.label.setFont(font)
+        self.label.setObjectName("label")
+        self.horizontalLayout.addWidget(self.label)
+        spacerItem3 = QtWidgets.QSpacerItem(583, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout.addItem(spacerItem3)
         self.botao_conexao = QtWidgets.QPushButton(self.frame)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
@@ -116,6 +126,135 @@ class Ui_Tela_Contatos(object):
         self.frame_2.setObjectName("frame_2")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.frame_2)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
+        self.frame_3 = QtWidgets.QFrame(self.frame_2)
+        self.frame_3.setMinimumSize(QtCore.QSize(0, 50))
+        self.frame_3.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_3.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_3.setObjectName("frame_3")
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.frame_3)
+        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+        self.procura = QtWidgets.QLineEdit(self.frame_3)
+        self.procura.setMinimumSize(QtCore.QSize(500, 50))
+        font = QtGui.QFont()
+        font.setFamily("Garamond")
+        font.setPointSize(12)
+        font.setBold(True)
+        self.procura.setFont(font)
+        self.procura.setStyleSheet("QLineEdit{\n"
+"background-color: rgb(50,50,50);\n"
+"color: rgb(255,255,255);\n"
+"border-radius: 15px;\n"
+"padding: 10px\n"
+"}")
+        self.procura.setObjectName("procura")
+        self.horizontalLayout_2.addWidget(self.procura)
+        spacerItem4 = QtWidgets.QSpacerItem(137, 20, QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_2.addItem(spacerItem4)
+        self.botao_remover_contato = QtWidgets.QPushButton(self.frame_3)
+        self.botao_remover_contato.setMinimumSize(QtCore.QSize(0, 40))
+        self.botao_remover_contato.setStyleSheet("QPushButton{\n"
+"icon: url(:/icons/remove_contato.svg);\n"
+"background-color: transparent;\n"
+"}\n"
+"\n"
+"QPushButton::hover{\n"
+"icon: url(:/icons/remove_contato_hover.svg);\n"
+"background-color: transparent;\n"
+"}")
+        self.botao_remover_contato.setText("")
+        self.botao_remover_contato.setIconSize(QtCore.QSize(35, 35))
+        self.botao_remover_contato.setObjectName("botao_remover_contato")
+        self.horizontalLayout_2.addWidget(self.botao_remover_contato)
+        spacerItem5 = QtWidgets.QSpacerItem(10, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_2.addItem(spacerItem5)
+        self.botao_adicionar_contato = QtWidgets.QPushButton(self.frame_3)
+        self.botao_adicionar_contato.setMinimumSize(QtCore.QSize(0, 40))
+        self.botao_adicionar_contato.setStyleSheet("QPushButton{\n"
+"icon: url(:/icons/adiciona_contato.svg);\n"
+"background-color: transparent;\n"
+"}\n"
+"\n"
+"QPushButton::hover{\n"
+"icon: url(:/icons/adiciona_contato_hover.svg);\n"
+"background-color: transparent;\n"
+"}")
+        self.botao_adicionar_contato.setText("")
+        self.botao_adicionar_contato.setIconSize(QtCore.QSize(35, 35))
+        self.botao_adicionar_contato.setObjectName("botao_adicionar_contato")
+        self.horizontalLayout_2.addWidget(self.botao_adicionar_contato)
+        self.verticalLayout_2.addWidget(self.frame_3)
+        self.frame_4 = QtWidgets.QFrame(self.frame_2)
+        self.frame_4.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_4.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_4.setObjectName("frame_4")
+        self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.frame_4)
+        self.verticalLayout_3.setObjectName("verticalLayout_3")
+        self.frame_5 = QtWidgets.QFrame(self.frame_4)
+        self.frame_5.setMinimumSize(QtCore.QSize(0, 30))
+        self.frame_5.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_5.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_5.setObjectName("frame_5")
+        self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.frame_5)
+        self.horizontalLayout_3.setObjectName("horizontalLayout_3")
+        self.label_2 = QtWidgets.QLabel(self.frame_5)
+        font = QtGui.QFont()
+        font.setFamily("Garamond")
+        font.setPointSize(13)
+        font.setBold(True)
+        self.label_2.setFont(font)
+        self.label_2.setObjectName("label_2")
+        self.horizontalLayout_3.addWidget(self.label_2)
+        spacerItem6 = QtWidgets.QSpacerItem(290, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_3.addItem(spacerItem6)
+        self.selecionar_tudo = QtWidgets.QPushButton(self.frame_5)
+        self.selecionar_tudo.setMinimumSize(QtCore.QSize(150, 35))
+        font = QtGui.QFont()
+        font.setFamily("Garamond")
+        font.setPointSize(10)
+        font.setBold(True)
+        self.selecionar_tudo.setFont(font)
+        self.selecionar_tudo.setStyleSheet("QPushButton{\n"
+"background-color: rgb(50,50,50);\n"
+"color: rgb(255,255,255);\n"
+"border-radius: 15px;\n"
+"}\n"
+"\n"
+"QPushButton::hover{\n"
+"background-color: rgb(90,90,90);\n"
+"border-radius:15px;\n"
+"}")
+        self.selecionar_tudo.setObjectName("selecionar_tudo")
+        self.horizontalLayout_3.addWidget(self.selecionar_tudo)
+        self.limpar_tudo = QtWidgets.QPushButton(self.frame_5)
+        self.limpar_tudo.setMinimumSize(QtCore.QSize(125, 35))
+        font = QtGui.QFont()
+        font.setFamily("Garamond")
+        font.setPointSize(10)
+        font.setBold(True)
+        self.limpar_tudo.setFont(font)
+        self.limpar_tudo.setStyleSheet("QPushButton{\n"
+"background-color: rgb(50,50,50);\n"
+"color: rgb(255,255,255);\n"
+"border-radius: 15px;\n"
+"}\n"
+"\n"
+"QPushButton::hover{\n"
+"background-color: rgb(90,90,90);\n"
+"border-radius:15px;\n"
+"}")
+        self.limpar_tudo.setObjectName("limpar_tudo")
+        self.horizontalLayout_3.addWidget(self.limpar_tudo)
+        self.verticalLayout_3.addWidget(self.frame_5)
+        self.line = QtWidgets.QFrame(self.frame_4)
+        self.line.setStyleSheet("background-color: rgb(50,50,50);")
+        self.line.setFrameShape(QtWidgets.QFrame.HLine)
+        self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line.setObjectName("line")
+        self.verticalLayout_3.addWidget(self.line)
+        self.tabela = QtWidgets.QTableView(self.frame_4)
+        self.tabela.setObjectName("tabela")
+        self.verticalLayout_3.addWidget(self.tabela)
+        self.verticalLayout_2.addWidget(self.frame_4)
         self.verticalLayout.addWidget(self.frame_2)
         Tela_Contatos.setCentralWidget(self.centralwidget)
 
@@ -125,4 +264,9 @@ class Ui_Tela_Contatos(object):
     def retranslateUi(self, Tela_Contatos):
         _translate = QtCore.QCoreApplication.translate
         Tela_Contatos.setWindowTitle(_translate("Tela_Contatos", "API WhatsApp"))
+        self.label.setText(_translate("Tela_Contatos", "<html><head/><body><p><span style=\" color:#ffffff;\">CONTATOS</span></p></body></html>"))
+        self.procura.setPlaceholderText(_translate("Tela_Contatos", "Pesquise Aqui"))
+        self.label_2.setText(_translate("Tela_Contatos", "<html><head/><body><p><span style=\" color:#ffffff;\">SEUS CONTATOS</span></p></body></html>"))
+        self.selecionar_tudo.setText(_translate("Tela_Contatos", "SELECIONAR TUDO"))
+        self.limpar_tudo.setText(_translate("Tela_Contatos", "LIMPAR TUDO"))
 import frontend.ui.contatos.icons_rc as icons_rc

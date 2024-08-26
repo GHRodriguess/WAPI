@@ -15,7 +15,7 @@ class Ui_Tela_Conexao(object):
     def setupUi(self, Tela_Conexao):
         Tela_Conexao.setObjectName("Tela_Conexao")
         Tela_Conexao.setWindowModality(QtCore.Qt.NonModal)
-        Tela_Conexao.setEnabled(True)       
+        Tela_Conexao.setEnabled(True)        
         Tela_Conexao.setMouseTracking(False)
         Tela_Conexao.setFocusPolicy(QtCore.Qt.NoFocus)
         Tela_Conexao.setStyleSheet("QMainWindow{\n"
@@ -82,8 +82,18 @@ class Ui_Tela_Conexao(object):
         self.botao_contatos.setIconSize(QtCore.QSize(40, 40))
         self.botao_contatos.setObjectName("botao_contatos")
         self.horizontalLayout.addWidget(self.botao_contatos)
-        spacerItem2 = QtWidgets.QSpacerItem(583, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        spacerItem2 = QtWidgets.QSpacerItem(10, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem2)
+        self.label_2 = QtWidgets.QLabel(self.frame)
+        font = QtGui.QFont()
+        font.setFamily("Garamond")
+        font.setPointSize(15)
+        font.setBold(True)
+        self.label_2.setFont(font)
+        self.label_2.setObjectName("label_2")
+        self.horizontalLayout.addWidget(self.label_2)
+        spacerItem3 = QtWidgets.QSpacerItem(583, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout.addItem(spacerItem3)
         self.botao_conexao = QtWidgets.QPushButton(self.frame)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
@@ -146,6 +156,7 @@ class Ui_Tela_Conexao(object):
     def retranslateUi(self, Tela_Conexao):
         _translate = QtCore.QCoreApplication.translate
         Tela_Conexao.setWindowTitle(_translate("Tela_Conexao", "API WhatsApp"))
+        self.label_2.setText(_translate("Tela_Conexao", "<html><head/><body><p><span style=\" color:#ffffff;\">CONEXÃO</span></p></body></html>"))
         self.label.setText(_translate("Tela_Conexao", "<html><head/><body><p align=\"center\"><span style=\" color:#ffffff;\">ESCANEIE O QR CODE</span></p></body></html>"))
         self.qrcode.setText(_translate("Tela_Conexao", "<html><head/><body><p align=\"center\"><span style=\" color:#ffffff;\"><br/></span></p></body></html>"))
 import frontend.ui.conexao.icons_rc as icons_rc
