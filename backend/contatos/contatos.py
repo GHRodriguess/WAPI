@@ -14,8 +14,7 @@ class Contatos():
     def __init__(self, ui, api):
         self.ui = ui
         self.api = api
-        self.model = None        
-        self.verifica_conexao()
+        self.model = None
         self.database = Database(os.path.join(os.getenv("APPDATA"), "API WhatsApp", "database.db"))
         self.database.cria_tabela('contatos', ["id INTEGER PRIMARY KEY AUTOINCREMENT", "nome_numero TEXT NOT NULL"])
         self.timer = QTimer()
@@ -34,11 +33,16 @@ class Contatos():
             self.database.delete("contatos", "nome_numero = ?", (marcado))
         self.atualiza_tabela()
     
-    def verifica_conexao(self):
+    def verifica_conexao(self):   
+        try:
+            self.api.verifica_conexao(espera=False)     
+        except Exception as e: 
+            print(e)
+            pass
         if self.api.conectado:
-            texto_conectado = "conectado"
+            texto_conectado = "conectado"            
         else:
-            texto_conectado = "nao_conectado"
+            texto_conectado = "nao_conectado"            
         self.ui.botao_conexao.setStyleSheet(f"""
 QPushButton{{
     icon: url(:/icons/{texto_conectado}.svg);

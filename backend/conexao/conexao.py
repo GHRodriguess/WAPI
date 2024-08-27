@@ -3,18 +3,20 @@ import threading
 class Conexao():
     def __init__(self, ui, api):
         self.ui = ui
-        self.api = api
-        self.verifica_conexao()
-        if not self.api.conectado:
-            self.gerencia_qrcode()
-        else:            
-            self.ui.qrcode.setText("VOCÊ JÁ SE CONECTOU")
-    
-    def verifica_conexao(self):
+        self.api = api  
+            
+    def verifica_conexao(self):   
+        try:
+            self.api.verifica_conexao(espera=False)     
+        except Exception as e: 
+            print(e)
+            pass
         if self.api.conectado:
             texto_conectado = "conectado"
+            self.ui.qrcode.setText("VOCÊ JÁ SE CONECTOU")
         else:
             texto_conectado = "nao_conectado"
+            self.gerencia_qrcode()
         self.ui.botao_conexao.setStyleSheet(f"""
 QPushButton{{
     icon: url(:/icons/{texto_conectado}.svg);

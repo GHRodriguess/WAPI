@@ -4,11 +4,16 @@ class Principal():
         self.api = api
         self.verifica_conexao()
     
-    def verifica_conexao(self):
+    def verifica_conexao(self):   
+        try:
+            self.api.verifica_conexao(espera=False)     
+        except Exception as e: 
+            print(e)
+            pass
         if self.api.conectado:
-            texto_conectado = "conectado"
+            texto_conectado = "conectado"            
         else:
-            texto_conectado = "nao_conectado"
+            texto_conectado = "nao_conectado"            
         self.ui.botao_conexao.setStyleSheet(f"""
 QPushButton{{
     icon: url(:/icons/{texto_conectado}.svg);
@@ -19,3 +24,4 @@ QPushButton::hover{{
     icon: url(:/icons/{texto_conectado}_hover.svg);
     background-color: transparent;
 }}""")
+    

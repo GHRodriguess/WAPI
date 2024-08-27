@@ -43,23 +43,25 @@ class App(QtWidgets.QMainWindow):
             self.telas.carrega_telas(tela=Ui_Tela_Principal, backend=Principal, parametros=self.api)
         
         self.ui = self.telas.ui
+        self.backend = self.telas.backend
         self.ui.botao_home.clicked.connect(self.carrega_tela_principal)
         self.ui.botao_contatos.clicked.connect(self.carrega_tela_contatos)
         self.ui.botao_conexao.clicked.connect(self.carrega_tela_conexao)
+        self.backend.verifica_conexao()
         if self.api.conectado:
             self.tarefas.gerencia_tarefas_segundo_plano([
                 ["pesquisa_contato", "Gabriel Henrique Rodrigues"],
-                ["envia_mensagem", "Essa mensagem foi enviada por uma API do WhatsApp."],                
-                ["envia_mensagem", "Essa mensagem foi enviada por uma API do WhatsApp."],                
-                ["envia_mensagem", "Essa mensagem foi enviada por uma API do WhatsApp."],                
+                ["envia_mensagem", "Essa mensagem foi enviada por uma API do WhatsApp."],
             ])
         
     def carrega_tela_conexao(self):
         self.telas.carrega_telas(tela=Ui_Tela_Conexao, backend=Conexao,parametros=self.api)
         self.ui = self.telas.ui
+        self.backend = self.telas.backend
         self.ui.botao_home.clicked.connect(self.carrega_tela_principal)
         self.ui.botao_contatos.clicked.connect(self.carrega_tela_contatos)
         self.ui.botao_conexao.clicked.connect(self.carrega_tela_conexao)
+        self.backend.verifica_conexao()
         
     def carrega_tela_contatos(self):
         self.telas.carrega_telas(tela=Ui_Tela_Contatos, backend=Contatos,parametros=self.api)
@@ -69,6 +71,7 @@ class App(QtWidgets.QMainWindow):
         self.ui.botao_contatos.clicked.connect(self.carrega_tela_contatos)
         self.ui.botao_conexao.clicked.connect(self.carrega_tela_conexao)        
         self.ui.botao_adicionar_contato.clicked.connect(lambda: self.telas.carrega_telas(tela=Ui_Adiciona_Contatos, segunda_tela=True, backend=Adiciona_Contatos, parametros=["propria_janela", self.backend]))
+        self.backend.verifica_conexao()
         self.backend.rodando()
 
 if __name__ == '__main__':

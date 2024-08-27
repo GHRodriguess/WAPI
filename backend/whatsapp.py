@@ -10,77 +10,78 @@ import time
 from PyQt5.QtGui import QPixmap
 import os
 
+
 class WhatsApp:
     def __init__(self):
-        self.diretorio = os.path.join(os.getenv('APPDATA'), 'API WhatsApp')     
+        self.diretorio = os.path.join(os.getenv("APPDATA"), "API WhatsApp")
         self.navegador = self.incia_navegador()
-        self.wait = WebDriverWait(self.navegador, 10)       
+        self.wait = WebDriverWait(self.navegador, 10)
         try:
-            self.verifica_conexao()    
+            self.verifica_conexao()
         except Exception as e:
-            self.conectado = False 
+            self.conectado = False
         self.qr_code_anterior = None
 
     def incia_navegador(self):
         chrome_options = Options()
-        chrome_options.add_argument("--headless=new")   
+        chrome_options.add_argument("--headless=new")
         chrome_options.add_argument(f"--user-data-dir={os.path.join(self.diretorio, 'dados_navegador')}")
         servico = Service(ChromeDriverManager().install())
         navegador = webdriver.Chrome(service=servico, options=chrome_options)
-        #navegador.maximize_window()
+        # navegador.maximize_window()
         navegador.get("https://web.whatsapp.com")
         return navegador
 
-    def monitora_qrcode(self, ui, conexao):        
-        import base64  
-        if self.qr_code_anterior:
-            print("Tem qr code anterior")
-            pixmap = QPixmap(os.path.join(self.diretorio,"imagem_qr_code.png"))
+    def monitora_qrcode(self, ui, conexao):
+        import base64
+        if self.qr_code_anterior:            
+            pixmap = QPixmap(os.path.join(self.diretorio, "imagem_qr_code.png"))
             ui.qrcode.setPixmap(pixmap)
-            ui.qrcode.repaint()   
-        canvas = self.wait.until(EC.presence_of_element_located((By.TAG_NAME, "canvas")))       
+            ui.qrcode.repaint()
+        canvas = self.wait.until(EC.presence_of_element_located((By.TAG_NAME, "canvas")))
         while True:
             try:
                 canvas = self.navegador.find_element(By.TAG_NAME, "canvas")
                 qr_code_atual = self.coleta_qrcode()
-                if qr_code_atual!= self.qr_code_anterior:
-                    with open(os.path.join(self.diretorio,"imagem_qr_code.png"), "wb") as f:
+                if qr_code_atual != self.qr_code_anterior:
+                    with open(os.path.join(self.diretorio, "imagem_qr_code.png"), "wb") as f:
                         f.write(base64.b64decode(qr_code_atual))
-                    self.qr_code_anterior = qr_code_atual
-                    print("QR Code alterado")
+                    self.qr_code_anterior = qr_code_atual                    
                     pixmap = QPixmap(os.path.join(self.diretorio, "imagem_qr_code.png"))
                     ui.qrcode.setPixmap(pixmap)
                     ui.qrcode.repaint()
                 time.sleep(1)
-            except Exception as e:            
+            except Exception as e:
                 self.verifica_conexao(e)
                 if self.conectado:
                     conexao.verifica_conexao()
                 break
-    
-    def coleta_qrcode(self): 
+
+    def coleta_qrcode(self):
         canvas = self.navegador.find_element(By.TAG_NAME, "canvas")
         image_data = self.navegador.execute_script("""
                 var canvas = arguments[0];
                 return canvas.toDataURL('image/png').substring(22);  // Remover o prefixo 'data:image/png;base64,'
-            """, canvas)
+            """,canvas,
+        )
 
         return image_data
         
-    def verifica_conexao(self, e=None):        
-        elementos = self.wait.until(EC.presence_of_element_located((By.TAG_NAME, "h1")))
+    def verifica_conexao(self, e=None, espera=True):  
+        if espera:      
+            elementos = self.wait.until(EC.presence_of_element_located((By.TAG_NAME, "h1")))
         elementos = self.navegador.find_elements(By.TAG_NAME, "h1")
-        elementos = [(elemento.text).lower() for elemento in elementos]        
+        elementos = [(elemento.text).lower() for elemento in elementos]
         if "chats" in elementos or "baixar o whatsapp para windows" in elementos or len(elementos) == 2:
             self.conectado = True            
         else:    
-            print("Deu erro")
+            self.conectado = False
             
     def pesquisa_usuario(self, identificador):    
         elemento = self.wait.until(EC. presence_of_element_located((By.CLASS_NAME, 'selectable-text')))    
         pesquisa = elemento.text
         if pesquisa:
-            elemento.send_keys(Keys.BACKSPACE * len(pesquisa))            
+            elemento.send_keys(Keys.BACKSPACE * len(pesquisa))
         elemento.send_keys(identificador, Keys.ENTER)
 
     def envia_mensagem(self, mensagem):
@@ -91,18 +92,20 @@ class WhatsApp:
                 ultima_mensagem = [elemento.text for elemento in self.navegador.find_elements(By.CLASS_NAME, "_ao3e") if elemento.text][-1]
                 if mensagem == ultima_mensagem:                    
                     break
-            except Exception as e:                
-
+            except Exception as e:  
                 pass
-    
+
     def __del__(self):
-        if self.navegador:
-            self.fecha_navegador()                  
-    
+        try:
+            if self.navegador:
+                self.fecha_navegador()
+        except Exception as e:
+            pass
+
     def fecha_navegador(self):
         self.navegador.quit()
-    
+        
 if __name__ == "__main__":
-    api = WhatsApp()    
-    api.pesquisa_usuario("Gabriel henrique Rodrigues")    
+    api = WhatsApp()
+    api.pesquisa_usuario("Gabriel henrique Rodrigues")
     api.envia_mensagem("Essa mensagem foi enviada por uma API do WhatsApp.")
