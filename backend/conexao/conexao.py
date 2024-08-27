@@ -5,7 +5,10 @@ class Conexao():
         self.ui = ui
         self.api = api
         self.verifica_conexao()
-        self.gerencia_qrcode()
+        if not self.api.conectado:
+            self.gerencia_qrcode()
+        else:            
+            self.ui.qrcode.setText("VOCÊ JÁ SE CONECTOU")
     
     def verifica_conexao(self):
         if self.api.conectado:

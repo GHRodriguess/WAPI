@@ -12,15 +12,19 @@ import os
 
 class WhatsApp:
     def __init__(self):
-        self.navegador = self.incia_navegador()      
-        self.conectado = False  
-        self.qr_code_anterior = None
-        self.wait = WebDriverWait(self.navegador, 10)    
         self.diretorio = os.path.join(os.getenv('APPDATA'), 'API WhatsApp')     
+        self.navegador = self.incia_navegador()
+        self.wait = WebDriverWait(self.navegador, 10)       
+        try:
+            self.verifica_conexao()    
+        except Exception as e:
+            self.conectado = False 
+        self.qr_code_anterior = None
 
     def incia_navegador(self):
         chrome_options = Options()
-        chrome_options.add_argument("--headless=new")        
+        chrome_options.add_argument("--headless=new")   
+        chrome_options.add_argument(f"--user-data-dir={os.path.join(self.diretorio, 'dados_navegador')}")
         servico = Service(ChromeDriverManager().install())
         navegador = webdriver.Chrome(service=servico, options=chrome_options)
         #navegador.maximize_window()
@@ -28,10 +32,7 @@ class WhatsApp:
         return navegador
 
     def monitora_qrcode(self, ui, conexao):        
-        import base64          
-        if self.conectado:
-            ui.qrcode.setText("VOCÊ JÁ SE CONECTOU")
-            return 
+        import base64  
         if self.qr_code_anterior:
             print("Tem qr code anterior")
             pixmap = QPixmap(os.path.join(self.diretorio,"imagem_qr_code.png"))
@@ -66,12 +67,12 @@ class WhatsApp:
 
         return image_data
         
-    def verifica_conexao(self, e):        
+    def verifica_conexao(self, e=None):        
         elementos = self.wait.until(EC.presence_of_element_located((By.TAG_NAME, "h1")))
         elementos = self.navegador.find_elements(By.TAG_NAME, "h1")
         elementos = [(elemento.text).lower() for elemento in elementos]        
         if "chats" in elementos or "baixar o whatsapp para windows" in elementos or len(elementos) == 2:
-            self.conectado = True
+            self.conectado = True            
         else:    
             print("Deu erro")
             
@@ -91,6 +92,7 @@ class WhatsApp:
                 if mensagem == ultima_mensagem:                    
                     break
             except Exception as e:                
+
                 pass
     
     def __del__(self):
