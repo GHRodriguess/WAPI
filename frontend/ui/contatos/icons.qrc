@@ -1,5 +1,6 @@
 <RCC>
   <qresource>
+    <file>icons/remove_contato_desabilitado.svg</file>
     <file>icons/adiciona_contato.svg</file>
     <file>icons/adiciona_contato_hover.svg</file>
     <file>icons/remove_contato.svg</file>

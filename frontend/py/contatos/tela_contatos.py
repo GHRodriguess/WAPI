@@ -151,6 +151,7 @@ class Ui_Tela_Contatos(object):
         spacerItem4 = QtWidgets.QSpacerItem(137, 20, QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem4)
         self.botao_remover_contato = QtWidgets.QPushButton(self.frame_3)
+        self.botao_remover_contato.setEnabled(False)
         self.botao_remover_contato.setMinimumSize(QtCore.QSize(0, 40))
         self.botao_remover_contato.setStyleSheet("QPushButton{\n"
 "icon: url(:/icons/remove_contato.svg);\n"
@@ -160,7 +161,13 @@ class Ui_Tela_Contatos(object):
 "QPushButton::hover{\n"
 "icon: url(:/icons/remove_contato_hover.svg);\n"
 "background-color: transparent;\n"
-"}")
+"}\n"
+"\n"
+"QPushButton:disabled{\n"
+"icon: url(:/icons/remove_contato_desabilitado.svg);\n"
+"background-color: transparent;\n"
+"}\n"
+"")
         self.botao_remover_contato.setText("")
         self.botao_remover_contato.setIconSize(QtCore.QSize(35, 35))
         self.botao_remover_contato.setObjectName("botao_remover_contato")
@@ -252,7 +259,89 @@ class Ui_Tela_Contatos(object):
         self.line.setObjectName("line")
         self.verticalLayout_3.addWidget(self.line)
         self.tabela = QtWidgets.QTableView(self.frame_4)
+        self.tabela.setStyleSheet("\n"
+"QHeaderView::section {\n"
+"    background-color: rgb(50, 50, 50);\n"
+"    color: rgb(255, 255, 255);\n"
+"    padding: 5px;\n"
+"    border: 1px solid #999999;\n"
+"    font-family: \"Garamond\";\n"
+"    font-weight: bold;\n"
+"    font-size: 14pt;\n"
+"}\n"
+"\n"
+"\n"
+"QHeaderView::section:hover {\n"
+"    background-color: rgb(90, 90, 90);\n"
+"}\n"
+"\n"
+"QHeaderView::section {\n"
+"    background-color: rgb(50, 50, 50);\n"
+"    color: rgb(255, 255, 255);\n"
+"    padding: 5px;\n"
+"    border: 1px solid #999999;\n"
+"    font-family: \"Garamond\";\n"
+"    font-weight: bold;\n"
+"    font-size: 10pt;\n"
+"}\n"
+"\n"
+"\n"
+"QHeaderView::section:hover {\n"
+"    background-color: rgb(90, 90, 90);\n"
+"}\n"
+"\n"
+"QScrollBar:vertical {\n"
+"    background: rgb(50, 50, 50);\n"
+"    width: 15px; \n"
+"    margin: 0px 0px 0px 0px;\n"
+"}\n"
+"\n"
+"QScrollBar:horizontal {\n"
+"    background: rgb(50,50, 50);\n"
+"    height: 15px; \n"
+"    margin: 0px 0px 0px 0px;\n"
+"}\n"
+"\n"
+"\n"
+"QScrollBar::handle {\n"
+"    background: rgb(90, 90, 90); \n"
+"    min-width: 20px;\n"
+"}\n"
+"\n"
+"\n"
+"QScrollBar::handle:hover {\n"
+"    background: rgb(110, 110, 110); \n"
+"}\n"
+"\n"
+"QScrollBar::add-line, QScrollBar::sub-line {\n"
+"    background: rgb(70, 70, 70);\n"
+"    height: 15px; \n"
+"}\n"
+"\n"
+"QScrollBar::add-line:hover, QScrollBar::sub-line:hover {\n"
+"    background: rgb(90, 90, 90); \n"
+"}\n"
+"\n"
+"QTableView {    \n"
+"    color: rgb(255, 255, 255);\n"
+"    gridline-color: rgb(100, 100, 100);\n"
+"    font-family: \"Garamond\";\n"
+"    font-size: 12pt;\n"
+"}\n"
+"\n"
+"QTableView::item {\n"
+"    background-color: rgb(50, 50, 50);\n"
+"    color: rgb(255, 255, 255);\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"\n"
+"QTableView::item:hover {\n"
+"    background-color: rgb(70, 70, 70);\n"
+"}")
         self.tabela.setObjectName("tabela")
+        self.tabela.horizontalHeader().setMinimumSectionSize(50)
+        self.tabela.horizontalHeader().setStretchLastSection(True)
         self.verticalLayout_3.addWidget(self.tabela)
         self.verticalLayout_2.addWidget(self.frame_4)
         self.verticalLayout.addWidget(self.frame_2)

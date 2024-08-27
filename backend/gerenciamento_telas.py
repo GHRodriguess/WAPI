@@ -52,9 +52,10 @@ class Gerenciamento_Telas(QtWidgets.QWidget):
                 
             if backend:
                 if parametros:
-                    if parametros == 'propria_janela':                        
-                        self.backend_2 = backend(self.ui_2, self.app2) 
-                    else:
-                        self.backend_2 = backend(self.ui_2, parametros) 
+                    if 'propria_janela' in parametros: 
+                        index = parametros.index('propria_janela')    
+                        parametros[index] = self.app2                   
+                    self.backend_2 = backend(self.ui_2, *parametros) 
+
                 else:
                     self.backend_2 = backend(self.ui_2)

@@ -27,7 +27,7 @@ class WhatsApp:
         navegador.get("https://web.whatsapp.com")
         return navegador
 
-    def monitora_qrcode(self, ui):        
+    def monitora_qrcode(self, ui, conexao):        
         import base64          
         if self.conectado:
             ui.qrcode.setText("VOCÊ JÁ SE CONECTOU")
@@ -53,6 +53,8 @@ class WhatsApp:
                 time.sleep(1)
             except Exception as e:            
                 self.verifica_conexao(e)
+                if self.conectado:
+                    conexao.verifica_conexao()
                 break
     
     def coleta_qrcode(self): 
@@ -69,7 +71,6 @@ class WhatsApp:
         elementos = self.navegador.find_elements(By.TAG_NAME, "h1")
         elementos = [(elemento.text).lower() for elemento in elementos]        
         if "chats" in elementos or "baixar o whatsapp para windows" in elementos or len(elementos) == 2:
-            print("CONECTADO")
             self.conectado = True
         else:    
             print("Deu erro")

@@ -15,8 +15,7 @@ class Tarefas():
             'envia_mensagem': self.api.envia_mensagem,
             
         }   
-        
-        for tarefa in tarefas:
+        for tarefa in tarefas:            
             acao = dicionario_acoes[tarefa[0]]
             parametros = tarefa[1:]            
-            acao(parametros)
+            acao(*parametros)               

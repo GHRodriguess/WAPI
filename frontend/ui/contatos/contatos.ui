@@ -324,6 +324,9 @@ padding: 10px
           </item>
           <item>
            <widget class="QPushButton" name="botao_remover_contato">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -339,7 +342,13 @@ background-color: transparent;
 QPushButton::hover{
 icon: url(:/icons/remove_contato_hover.svg);
 background-color: transparent;
-}</string>
+}
+
+QPushButton:disabled{
+icon: url(:/icons/remove_contato_desabilitado.svg);
+background-color: transparent;
+}
+</string>
             </property>
             <property name="text">
              <string/>
@@ -530,7 +539,96 @@ border-radius:15px;
            </widget>
           </item>
           <item>
-           <widget class="QTableView" name="tabela"/>
+           <widget class="QTableView" name="tabela">
+            <property name="styleSheet">
+             <string notr="true">
+QHeaderView::section {
+    background-color: rgb(50, 50, 50);
+    color: rgb(255, 255, 255);
+    padding: 5px;
+    border: 1px solid #999999;
+    font-family: &quot;Garamond&quot;;
+    font-weight: bold;
+    font-size: 14pt;
+}
+
+
+QHeaderView::section:hover {
+    background-color: rgb(90, 90, 90);
+}
+
+QHeaderView::section {
+    background-color: rgb(50, 50, 50);
+    color: rgb(255, 255, 255);
+    padding: 5px;
+    border: 1px solid #999999;
+    font-family: &quot;Garamond&quot;;
+    font-weight: bold;
+    font-size: 10pt;
+}
+
+
+QHeaderView::section:hover {
+    background-color: rgb(90, 90, 90);
+}
+
+QScrollBar:vertical {
+    background: rgb(50, 50, 50);
+    width: 15px; 
+    margin: 0px 0px 0px 0px;
+}
+
+QScrollBar:horizontal {
+    background: rgb(50,50, 50);
+    height: 15px; 
+    margin: 0px 0px 0px 0px;
+}
+
+
+QScrollBar::handle {
+    background: rgb(90, 90, 90); 
+    min-width: 20px;
+}
+
+
+QScrollBar::handle:hover {
+    background: rgb(110, 110, 110); 
+}
+
+QScrollBar::add-line, QScrollBar::sub-line {
+    background: rgb(70, 70, 70);
+    height: 15px; 
+}
+
+QScrollBar::add-line:hover, QScrollBar::sub-line:hover {
+    background: rgb(90, 90, 90); 
+}
+
+QTableView {    
+    color: rgb(255, 255, 255);
+    gridline-color: rgb(100, 100, 100);
+    font-family: &quot;Garamond&quot;;
+    font-size: 12pt;
+}
+
+QTableView::item {
+    background-color: rgb(50, 50, 50);
+    color: rgb(255, 255, 255);
+    padding: 5px;
+}
+
+
+QTableView::item:hover {
+    background-color: rgb(70, 70, 70);
+}</string>
+            </property>
+            <attribute name="horizontalHeaderMinimumSectionSize">
+             <number>50</number>
+            </attribute>
+            <attribute name="horizontalHeaderStretchLastSection">
+             <bool>true</bool>
+            </attribute>
+           </widget>
           </item>
          </layout>
         </widget>

@@ -24,6 +24,6 @@ QPushButton::hover{{
 }}""")
     
     def gerencia_qrcode(self):
-        self.api_thread = threading.Thread(target=lambda: self.api.monitora_qrcode(self.ui))
+        self.api_thread = threading.Thread(target=lambda: self.api.monitora_qrcode(self.ui, self))
         self.api_thread.daemon = True  
         self.api_thread.start()
