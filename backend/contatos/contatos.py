@@ -16,7 +16,7 @@ class Contatos():
         self.api = api
         self.model = None
         self.database = Database(os.path.join(os.getenv("APPDATA"), "API WhatsApp", "database.db"))
-        self.database.cria_tabela('contatos', ["id INTEGER PRIMARY KEY AUTOINCREMENT", "nome_numero TEXT NOT NULL"])
+        self.database.cria_tabela('contatos', ["id INTEGER PRIMARY KEY AUTOINCREMENT", "nome TEXT NOT NULL", "numero TEXT NOT NULL","contato_confianca BOOLEAN NOT NULL"])
         self.timer = QTimer()
         self.timer.setSingleShot(True)
         self.timer.timeout.connect(self.atualiza_estado_botao)
@@ -29,8 +29,8 @@ class Contatos():
     
     def remove_contato(self):
         self.verificar_marcados()        
-        for marcado in self.marcados:
-            self.database.delete("contatos", "nome_numero = ?", (marcado))
+        for marcado in self.marcados:            
+            self.database.delete("contatos", "nome = ?", (marcado[0],))
         self.atualiza_tabela()
     
     def verifica_conexao(self):   
@@ -59,17 +59,22 @@ QPushButton::hover{{
         if self.model:
             self.model.clear()
         self.model = QStandardItemModel()
-        resultados = self.database.fetch_all("contatos", ["nome_numero"])
+        resultados = self.database.fetch_all("contatos", ["nome", "numero","contato_confianca"])
         if resultados:            
             self.model.setColumnCount(len(resultados[0]) + 1)
-            headers = ["", "NOME/NÚMERO CONTATO"]
+            headers = ["", "NOME", "NÚMERO", "CONTATO DE CONFIANÇA"]
             for col, header in enumerate(headers):
                 self.model.setHeaderData(col, Qt.Horizontal, header)        
             
             for linha, texto in enumerate(resultados):
                 self.ui.checkbox_item = QStandardItem()
                 self.ui.checkbox_item.setCheckable(True)
-                self.ui.checkbox_item.setCheckState(Qt.Unchecked)            
+                self.ui.checkbox_item.setCheckState(Qt.Unchecked)  
+                texto = list(texto)                
+                if texto[2] == 1:
+                    texto[2] = "Contato de Confiança"
+                else:
+                    texto[2] = ""                      
                 texto = [QStandardItem(str(item)) for item in texto]
                 texto.insert(0, self.ui.checkbox_item)
                 

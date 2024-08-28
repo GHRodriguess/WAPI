@@ -270,7 +270,7 @@ border-radius:15px;
           </spacer>
          </item>
          <item>
-          <widget class="QLineEdit" name="dados_contato">
+          <widget class="QLineEdit" name="nome_contato">
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -291,7 +291,85 @@ border-radius: 15px;
 padding: 10px</string>
            </property>
            <property name="placeholderText">
-            <string>Adicione os dados aqui</string>
+            <string>Adicione o nome aqui</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="verticalSpacer_4">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>10</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="numero_contato">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>50</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Garamond</family>
+             <pointsize>12</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(60,60,60);
+color: rgb(255,255,255);
+border-radius: 15px;
+padding: 10px</string>
+           </property>
+           <property name="placeholderText">
+            <string>Adicione o número aqui</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="verticalSpacer_5">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>10</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="contato_confianca">
+           <property name="font">
+            <font>
+             <family>Garamond</family>
+             <pointsize>10</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QCheckBox{
+color: rgb(255,255,255);
+background-color: transparent
+}</string>
+           </property>
+           <property name="text">
+            <string>SALVAR COMO CONTATO DE CONFIANÇA</string>
            </property>
           </widget>
          </item>

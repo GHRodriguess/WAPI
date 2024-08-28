@@ -19,13 +19,11 @@ from backend.gerenciamento_tarefas import Tarefas
 
 class App(QtWidgets.QMainWindow):
     def __init__(self):
-        super().__init__()
-        self.api_ready_event = threading.Event()  
-        self.api_threading()             
+        super().__init__() 
         self.configura_diretorio_aplicacao()
         self.setCentralWidget(QtWidgets.QWidget())  
         self.centralWidget().setLayout(QtWidgets.QVBoxLayout())    
-        self.api_ready_event.wait() 
+        self.api = WhatsApp()  
         self.telas = Gerenciamento_Telas(self)
         self.tarefas = Tarefas(self.api)
         self.carrega_tela_principal(primeira_vez=True)
@@ -38,14 +36,6 @@ class App(QtWidgets.QMainWindow):
         diretorio = os.path.join(os.getenv('APPDATA'), 'API WhatsApp')
         if not os.path.exists(diretorio):
             os.makedirs(diretorio)
-
-    def inicia_api(self):
-        self.api = WhatsApp()  
-        self.api_ready_event.set() 
-        
-    def api_threading(self):
-        whatsapp_thread = threading.Thread(target=self.inicia_api)
-        whatsapp_thread.start()
 
     def fecha_navegador(self):
         if hasattr(self, 'api') and self.api:
@@ -65,8 +55,8 @@ class App(QtWidgets.QMainWindow):
         self.backend.verifica_conexao()
         if self.api.conectado:
             self.tarefas.gerencia_tarefas_segundo_plano([
-                ["pesquisa_contato", "Gabriel Henrique Rodrigues"],
-                ["envia_mensagem", "Essa mensagem foi enviada por uma API do WhatsApp."],
+                ["pesquisa_contato", "+55 44 98448-6131"],
+                ["envia_mensagem", "Essa mensagem foi enviada por uma API do WhatsApp."],              
             ])
         
     def carrega_tela_conexao(self):

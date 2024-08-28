@@ -340,7 +340,8 @@ class Ui_Tela_Contatos(object):
 "    background-color: rgb(70, 70, 70);\n"
 "}")
         self.tabela.setObjectName("tabela")
-        self.tabela.horizontalHeader().setMinimumSectionSize(50)
+        self.tabela.horizontalHeader().setDefaultSectionSize(200)
+        self.tabela.horizontalHeader().setMinimumSectionSize(39)
         self.tabela.horizontalHeader().setStretchLastSection(True)
         self.verticalLayout_3.addWidget(self.tabela)
         self.verticalLayout_2.addWidget(self.frame_4)

@@ -9,13 +9,15 @@ from selenium.webdriver.support import expected_conditions as EC
 import time
 from PyQt5.QtGui import QPixmap
 import os
+from backend.database import Database
 
 
 class WhatsApp:
     def __init__(self):
         self.diretorio = os.path.join(os.getenv("APPDATA"), "API WhatsApp")
         self.navegador = self.incia_navegador()
-        self.wait = WebDriverWait(self.navegador, 10)
+        self.database = Database(os.path.join(os.getenv("APPDATA"), "API WhatsApp", "database.db"))
+        self.wait = WebDriverWait(self.navegador, 10)              
         try:
             self.verifica_conexao()
         except Exception as e:
@@ -31,6 +33,13 @@ class WhatsApp:
         # navegador.maximize_window()
         navegador.get("https://web.whatsapp.com")
         return navegador
+    
+    def obtem_contato_confianca(self):
+        contato_confianca = self.database.fetch_one('contatos', colunas=["numero"],condition='contato_confianca = ?', params=(True,))
+        if isinstance(contato_confianca, tuple):
+            contato_confianca = str(contato_confianca[0])        
+        return contato_confianca if contato_confianca else None
+            
 
     def monitora_qrcode(self, ui, conexao):
         import base64
@@ -77,20 +86,49 @@ class WhatsApp:
         else:    
             self.conectado = False
             
-    def pesquisa_usuario(self, identificador):    
-        elemento = self.wait.until(EC. presence_of_element_located((By.CLASS_NAME, 'selectable-text')))    
-        pesquisa = elemento.text
-        if pesquisa:
-            elemento.send_keys(Keys.BACKSPACE * len(pesquisa))
-        elemento.send_keys(identificador, Keys.ENTER)
+    def pesquisa_usuario(self, identificador): 
+        elemento = self.wait.until(EC. presence_of_element_located((By.CLASS_NAME, 'selectable-text'))) 
+        pesquisa = elemento.text        
+        if pesquisa: 
+            elemento.send_keys(Keys.CONTROL + "a")
+            elemento.send_keys(Keys.BACKSPACE) 
 
-    def envia_mensagem(self, mensagem):
+        elemento = self.navegador.find_element(By.CLASS_NAME, "selectable-text")
+        elemento.send_keys(identificador, Keys.ENTER)
+        tem_contato = self.verifica_se_existe_contato(identificador)  
+        if not tem_contato:
+            self.contato_confianca = self.obtem_contato_confianca()              
+            self.pesquisa_usuario(self.contato_confianca)            
+            self.envia_mensagem(identificador, click=True)
+            
+    def verifica_se_existe_contato(self, identificador):        
+        try:
+            resultados = self.wait.until(EC.presence_of_all_elements_located((By.CLASS_NAME, "_ao3e")))            
+            resultados = [resultado.text for resultado in resultados if resultado.text]            
+            if "Procurando por conversas, contatos ou mensagens..." in resultados:
+                return self.verifica_se_existe_contato(identificador) 
+            
+            if "Nenhuma conversa, contato ou mensagem encontrada" in resultados:                
+                return False
+            
+            if not identificador in resultados:         
+                return True
+            
+        except Exception as e:            
+            return self.verifica_se_existe_contato(identificador) 
+            
+    def envia_mensagem(self, mensagem, click=False):        
         elemento = self.wait.until(EC.presence_of_all_elements_located((By.CLASS_NAME, "selectable-text")))[-1]
-        elemento.send_keys(mensagem, Keys.ENTER)     
+        elemento.send_keys(mensagem, Keys.ENTER)  
         while True:
             try: 
-                ultima_mensagem = [elemento.text for elemento in self.navegador.find_elements(By.CLASS_NAME, "_ao3e") if elemento.text][-1]
-                if mensagem == ultima_mensagem:                    
+                elementos = self.navegador.find_elements(By.CLASS_NAME, "_ao3e") 
+                ultima_mensagem = [elemento.text for elemento in elementos if elemento.text][-1]
+                if mensagem == ultima_mensagem:    
+                    if click:
+                        elementos[-1].click()      
+                        self.navegador.find_element(By.CLASS_NAME, "_aj-z").click()  
+                        time.sleep(1)        
                     break
             except Exception as e:  
                 pass
