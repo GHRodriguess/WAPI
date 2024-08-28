@@ -2,6 +2,7 @@ import sys
 from PyQt5 import QtWidgets
 import os
 from PyQt5.QtCore import QTimer
+import threading
 
 from frontend.py.tela_principal.tela_principal import Ui_Tela_Principal
 from frontend.py.conexao.tela_conexao import Ui_Tela_Conexao
@@ -19,23 +20,37 @@ from backend.gerenciamento_tarefas import Tarefas
 class App(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
+        self.api_ready_event = threading.Event()  
+        self.api_threading()             
         self.configura_diretorio_aplicacao()
-        self.telas = Gerenciamento_Telas(self)
-        self.api = WhatsApp()
-        self.tarefas = Tarefas(self.api)
         self.setCentralWidget(QtWidgets.QWidget())  
-        self.centralWidget().setLayout(QtWidgets.QVBoxLayout())  
+        self.centralWidget().setLayout(QtWidgets.QVBoxLayout())    
+        self.api_ready_event.wait() 
+        self.telas = Gerenciamento_Telas(self)
+        self.tarefas = Tarefas(self.api)
         self.carrega_tela_principal(primeira_vez=True)
 
     def closeEvent(self, event):        
         event.accept()        
-        QTimer.singleShot(1, self.api.fecha_navegador)
+        QTimer.singleShot(1, self.fecha_navegador)
 
     def configura_diretorio_aplicacao(self):
         diretorio = os.path.join(os.getenv('APPDATA'), 'API WhatsApp')
         if not os.path.exists(diretorio):
-            os.makedirs(diretorio)    
+            os.makedirs(diretorio)
 
+    def inicia_api(self):
+        self.api = WhatsApp()  
+        self.api_ready_event.set() 
+        
+    def api_threading(self):
+        whatsapp_thread = threading.Thread(target=self.inicia_api)
+        whatsapp_thread.start()
+
+    def fecha_navegador(self):
+        if hasattr(self, 'api') and self.api:
+            self.api.fecha_navegador()
+    
     def carrega_tela_principal(self, primeira_vez=False):
         if primeira_vez:
             self.telas.carrega_telas(tela=Ui_Tela_Principal, backend=Principal, dimensoes=(800,600),parametros=self.api)
