@@ -99,7 +99,8 @@ class WhatsApp:
         if not tem_contato:
             self.contato_confianca = self.obtem_contato_confianca()              
             self.pesquisa_usuario(self.contato_confianca)            
-            self.envia_mensagem(identificador, click=True)
+            retorno = self.envia_mensagem(identificador, click=True)            
+            return retorno if retorno else None
             
     def verifica_se_existe_contato(self, identificador):        
         try:
@@ -127,8 +128,12 @@ class WhatsApp:
                 if mensagem == ultima_mensagem:    
                     if click:
                         elementos[-1].click()      
-                        self.navegador.find_element(By.CLASS_NAME, "_aj-z").click()  
-                        time.sleep(1)        
+                        elemento_entrar_conversa = self.navegador.find_element(By.CLASS_NAME, "_aj-z")
+                        if not "copiar" in elemento_entrar_conversa.text.lower():
+                            elemento_entrar_conversa.click()  
+                        else:
+                            return "Número de telefone não encontrado."
+                        time.sleep(1.5)        
                     break
             except Exception as e:  
                 pass

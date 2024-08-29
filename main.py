@@ -54,11 +54,21 @@ class App(QtWidgets.QMainWindow):
         self.ui.botao_conexao.clicked.connect(self.carrega_tela_conexao)
         self.backend.verifica_conexao()
         if self.api.conectado:
-            self.tarefas.gerencia_tarefas_segundo_plano([
-                ["pesquisa_contato", "+55 44 98448-6131"],
-                ["envia_mensagem", "Essa mensagem foi enviada por uma API do WhatsApp."],              
-            ])
-        
+            print(self.tarefas.rodando)
+            if not self.tarefas.rodando:
+                numeros = ["+55 42 99846-0016", "+55 44 3031-3571", "+55 44 98448-6131"]
+                mensagens = ["Essa mensagem foi enviada por uma API do WhatsApp.", "Botei agora para você não se assustar"]
+                tarefas = []
+                for numero in numeros:
+                    tarefa_atual = [
+                        ["pesquisa_contato", numero],                    
+                        ]       
+                    for mensagem in mensagens:
+                        tarefa_atual.append(["envia_mensagem", mensagem])
+                    tarefas.extend(tarefa_atual)
+                    
+                self.tarefas.gerencia_tarefas_segundo_plano(tarefas)
+            
     def carrega_tela_conexao(self):
         self.telas.carrega_telas(tela=Ui_Tela_Conexao, backend=Conexao,parametros=self.api)
         self.ui = self.telas.ui
