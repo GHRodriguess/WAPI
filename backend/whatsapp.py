@@ -123,6 +123,7 @@ class WhatsApp:
         elemento.send_keys(mensagem, Keys.ENTER)  
         while True:
             try: 
+                contagem = 0
                 elementos = self.navegador.find_elements(By.CLASS_NAME, "_ao3e") 
                 ultima_mensagem = [elemento.text for elemento in elementos if elemento.text][-1]
                 if mensagem == ultima_mensagem:    
@@ -135,6 +136,11 @@ class WhatsApp:
                             return "Número de telefone não encontrado."
                         time.sleep(1.5)        
                     break
+                else:
+                    contagem += 1
+                    if contagem >= 50:
+                        return "Mensagem não enviada."
+                    
             except Exception as e:  
                 pass
 

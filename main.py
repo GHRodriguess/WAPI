@@ -53,8 +53,7 @@ class App(QtWidgets.QMainWindow):
         self.ui.botao_contatos.clicked.connect(self.carrega_tela_contatos)
         self.ui.botao_conexao.clicked.connect(self.carrega_tela_conexao)
         self.backend.verifica_conexao()
-        if self.api.conectado:
-            print(self.tarefas.rodando)
+        if self.api.conectado:            
             if not self.tarefas.rodando:
                 numeros = ["+55 42 99846-0016", "+55 44 3031-3571", "+55 44 98448-6131"]
                 mensagens = ["Essa mensagem foi enviada por uma API do WhatsApp.", "Botei agora para você não se assustar"]
