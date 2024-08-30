@@ -4,6 +4,7 @@ from backend.database import Database
 from PyQt5.QtGui import QStandardItem, QStandardItemModel
 from PyQt5.QtCore import Qt, QModelIndex, QSortFilterProxyModel, QTimer, QRegularExpression
 import os
+import ast
 import time
 from tkinter import filedialog
 
@@ -15,6 +16,7 @@ class Contatos():
         self.ui = ui
         self.api = api
         self.model = None
+        self.arquivo_marcados = os.path.join(os.getenv("APPDATA"), "API WhatsApp", "marcados.txt")
         self.database = Database(os.path.join(os.getenv("APPDATA"), "API WhatsApp", "database.db"))
         self.database.cria_tabela('contatos', ["id INTEGER PRIMARY KEY AUTOINCREMENT", "nome TEXT NOT NULL", "numero TEXT NOT NULL","contato_confianca BOOLEAN NOT NULL"])
         self.timer = QTimer()
@@ -69,8 +71,12 @@ QPushButton::hover{{
             for linha, texto in enumerate(resultados):
                 self.ui.checkbox_item = QStandardItem()
                 self.ui.checkbox_item.setCheckable(True)
-                self.ui.checkbox_item.setCheckState(Qt.Unchecked)  
-                texto = list(texto)                
+                texto = list(texto) 
+                marcado = self.verifica_salvo_em_marcados(texto)
+                if marcado: 
+                    self.ui.checkbox_item.setCheckState(Qt.Checked)   
+                else:
+                    self.ui.checkbox_item.setCheckState(Qt.Unchecked)               
                 if texto[2] == 1:
                     texto[2] = "Contato de Confiança"
                 else:
@@ -114,6 +120,30 @@ QPushButton::hover{{
             self.ui.botao_remover_contato.setEnabled(True)
         else:
             self.ui.botao_remover_contato.setEnabled(False)
+        self.salva_marcados()
+        
+    def salva_marcados(self):
+        with open(self.arquivo_marcados, "w") as arquivo:
+            for marcado in self.marcados: 
+                texto = f"{marcado[0]}, {marcado[1]}\n"
+                arquivo.write(texto)
+                
+    def verifica_salvo_em_marcados(self, texto):        
+        if os.path.isfile(self.arquivo_marcados):       
+            marcados = []     
+            with open(self.arquivo_marcados, "r") as arquivo:                
+                for linha in arquivo.readlines():
+                    nome, numero = linha.split(",")
+                    marcados.append(nome)
+                    marcados.append(numero)
+
+            nome = texto[0] 
+            if nome in marcados:                
+                return True
+            else:
+                return False
+        else:
+            return False
 
     def seleciona_tudo(self, acao:str):        
         for linha_busca in range(self.busca.rowCount()):

@@ -15,7 +15,7 @@ class Ui_Tela_Principal(object):
     def setupUi(self, Tela_Principal):
         Tela_Principal.setObjectName("Tela_Principal")
         Tela_Principal.setWindowModality(QtCore.Qt.NonModal)
-        Tela_Principal.setEnabled(True)        
+        Tela_Principal.setEnabled(True)
         Tela_Principal.setMouseTracking(False)
         Tela_Principal.setFocusPolicy(QtCore.Qt.NoFocus)
         Tela_Principal.setStyleSheet("QMainWindow{\n"
@@ -48,6 +48,7 @@ class Ui_Tela_Principal(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.botao_home.sizePolicy().hasHeightForWidth())
         self.botao_home.setSizePolicy(sizePolicy)
+        self.botao_home.setFocusPolicy(QtCore.Qt.NoFocus)
         self.botao_home.setStyleSheet("QPushButton{\n"
 "icon: url(:/icons/home.svg);\n"
 "background-color: transparent;\n"
@@ -69,6 +70,7 @@ class Ui_Tela_Principal(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.botao_contatos.sizePolicy().hasHeightForWidth())
         self.botao_contatos.setSizePolicy(sizePolicy)
+        self.botao_contatos.setFocusPolicy(QtCore.Qt.NoFocus)
         self.botao_contatos.setStyleSheet("QPushButton{\n"
 "icon: url(:/icons/contatos.svg);\n"
 "background-color: transparent;\n"
@@ -101,6 +103,7 @@ class Ui_Tela_Principal(object):
         sizePolicy.setHeightForWidth(self.botao_conexao.sizePolicy().hasHeightForWidth())
         self.botao_conexao.setSizePolicy(sizePolicy)
         self.botao_conexao.setMinimumSize(QtCore.QSize(40, 40))
+        self.botao_conexao.setFocusPolicy(QtCore.Qt.NoFocus)
         self.botao_conexao.setStyleSheet("QPushButton{\n"
 "icon: url(:/icons/nao_conectado.svg);\n"
 "background-color: transparent;\n"
@@ -124,6 +127,142 @@ class Ui_Tela_Principal(object):
         self.frame_2.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_2.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_2.setObjectName("frame_2")
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.frame_2)
+        self.verticalLayout_2.setObjectName("verticalLayout_2")
+        self.frame_3 = QtWidgets.QFrame(self.frame_2)
+        self.frame_3.setMaximumSize(QtCore.QSize(16777215, 50))
+        self.frame_3.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_3.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_3.setObjectName("frame_3")
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.frame_3)
+        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+        self.botao_adiciona_item = QtWidgets.QPushButton(self.frame_3)
+        self.botao_adiciona_item.setMinimumSize(QtCore.QSize(30, 30))
+        self.botao_adiciona_item.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.botao_adiciona_item.setStyleSheet("QPushButton{\n"
+"    background-color: transparent;\n"
+"    icon: url(:/icons/adiciona_item.svg);\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"    icon: url(:/icons/adiciona_item_hover.svg);\n"
+"}")
+        self.botao_adiciona_item.setText("")
+        self.botao_adiciona_item.setIconSize(QtCore.QSize(30, 30))
+        self.botao_adiciona_item.setObjectName("botao_adiciona_item")
+        self.horizontalLayout_2.addWidget(self.botao_adiciona_item)
+        self.botao_remove_item = QtWidgets.QPushButton(self.frame_3)
+        self.botao_remove_item.setMinimumSize(QtCore.QSize(30, 30))
+        self.botao_remove_item.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.botao_remove_item.setStyleSheet("QPushButton{\n"
+"    icon: url(:/icons/remove_item.svg);\n"
+"    background-color: transparent;\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"    icon: url(:/icons/remove_item_hover.svg);\n"
+"}")
+        self.botao_remove_item.setText("")
+        self.botao_remove_item.setIconSize(QtCore.QSize(30, 30))
+        self.botao_remove_item.setObjectName("botao_remove_item")
+        self.horizontalLayout_2.addWidget(self.botao_remove_item)
+        spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_2.addItem(spacerItem4)
+        self.botao_status_contatos = QtWidgets.QPushButton(self.frame_3)
+        self.botao_status_contatos.setMinimumSize(QtCore.QSize(30, 30))
+        self.botao_status_contatos.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.botao_status_contatos.setStyleSheet("QPushButton{\n"
+"    icon: url(:/icons/sem_contatos_selecionados.svg);\n"
+"    background-color: transparent;\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"    icon: url(:/icons/sem_contatos_selecionados_hover.svg);\n"
+"}")
+        self.botao_status_contatos.setText("")
+        self.botao_status_contatos.setIconSize(QtCore.QSize(30, 30))
+        self.botao_status_contatos.setObjectName("botao_status_contatos")
+        self.horizontalLayout_2.addWidget(self.botao_status_contatos)
+        self.verticalLayout_2.addWidget(self.frame_3)
+        self.frame_4 = QtWidgets.QFrame(self.frame_2)
+        self.frame_4.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_4.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_4.setObjectName("frame_4")
+        self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.frame_4)
+        self.horizontalLayout_3.setObjectName("horizontalLayout_3")
+        self.acoes = QtWidgets.QListWidget(self.frame_4)
+        font = QtGui.QFont()
+        font.setFamily("Garamond")
+        font.setPointSize(12)
+        font.setBold(True)
+        self.acoes.setFont(font)
+        self.acoes.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.acoes.setAutoFillBackground(False)
+        self.acoes.setStyleSheet("QListWidget {\n"
+"    background-color: rgb(90,90,90);\n"
+"    color: rgb(255,255,255);\n"
+"    border-radius: 15px;\n"
+"    border: 1px solid rgb(50,50,50);\n"
+"}\n"
+"\n"
+"QListWidget::item {\n"
+"    color: rgb(255,255,255);\n"
+"    border-bottom: 1px solid rgb(50,50,50); \n"
+"    padding: 10px;   \n"
+"}\n"
+"\n"
+"QListWidget::item:selected{\n"
+"    background-color: rgb(80,80,80);\n"
+"    border: none;\n"
+"    outline: none\n"
+"}\n"
+"\n"
+"\n"
+"")
+        self.acoes.setDragDropMode(QtWidgets.QAbstractItemView.InternalMove)
+        self.acoes.setObjectName("acoes")
+        self.horizontalLayout_3.addWidget(self.acoes)
+        self.verticalLayout_2.addWidget(self.frame_4)
+        self.frame_5 = QtWidgets.QFrame(self.frame_2)
+        self.frame_5.setMinimumSize(QtCore.QSize(0, 45))
+        self.frame_5.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_5.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_5.setObjectName("frame_5")
+        self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.frame_5)
+        self.horizontalLayout_4.setObjectName("horizontalLayout_4")
+        spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_4.addItem(spacerItem5)
+        self.botao_executar = QtWidgets.QPushButton(self.frame_5)
+        self.botao_executar.setEnabled(False)
+        self.botao_executar.setMinimumSize(QtCore.QSize(125, 45))
+        font = QtGui.QFont()
+        font.setFamily("Garamond")
+        font.setPointSize(12)
+        font.setBold(True)
+        self.botao_executar.setFont(font)
+        self.botao_executar.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.botao_executar.setStyleSheet("QPushButton{\n"
+"    background-color: rgb(0,0,205);\n"
+"    color: rgb(255,255,255);\n"
+"    border-radius: 15px;\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"    background-color: rgb(0,0,155);\n"
+"}\n"
+"\n"
+"QPushButton:disabled {\n"
+"    background-color: rgb(200,200,200); \n"
+"    color: rgb(150,150,150);  \n"
+"    border: 1px solid rgb(150,150,150);\n"
+"}")
+        self.botao_executar.setObjectName("botao_executar")
+        self.horizontalLayout_4.addWidget(self.botao_executar)
+        spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_4.addItem(spacerItem6)
+        self.verticalLayout_2.addWidget(self.frame_5)
         self.verticalLayout.addWidget(self.frame_2)
         Tela_Principal.setCentralWidget(self.centralwidget)
 
@@ -134,4 +273,5 @@ class Ui_Tela_Principal(object):
         _translate = QtCore.QCoreApplication.translate
         Tela_Principal.setWindowTitle(_translate("Tela_Principal", "API WhatsApp"))
         self.label.setText(_translate("Tela_Principal", "<html><head/><body><p><span style=\" color:#ffffff;\">MENSAGENS</span></p></body></html>"))
+        self.botao_executar.setText(_translate("Tela_Principal", "EXECUTAR"))
 import frontend.ui.tela_principal.icons_rc as icons_rc

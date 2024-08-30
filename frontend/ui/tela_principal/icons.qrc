@@ -1,5 +1,13 @@
 <RCC>
   <qresource>
+    <file>icons/sem_contatos_selecionados.svg</file>
+    <file>icons/sem_contatos_selecionados_hover.svg</file>
+    <file>icons/contatos_selecionados.svg</file>
+    <file>icons/contatos_selecionados_hover.svg</file>
+    <file>icons/remove_item.svg</file>
+    <file>icons/remove_item_hover.svg</file>
+    <file>icons/adiciona_item.svg</file>
+    <file>icons/adiciona_item_hover.svg</file>
     <file>icons/home.svg</file>
     <file>icons/conectado.svg</file>
     <file>icons/conectado_hover.svg</file>
