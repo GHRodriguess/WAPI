@@ -7,12 +7,24 @@ class Tarefas():
         self.somente_contato = True
         self.rodando = False
     
-    def gerencia_tarefas_segundo_plano(self, tarefas:list):
-        self.tarefas_thread = threading.Thread(target=lambda: self.realiza_tarefas(tarefas))
+    def gerencia_tarefas_segundo_plano(self, tarefas: list):
+        self.retornos_event = threading.Event() 
+        def executar_tarefas():
+            self.retornos = self.realiza_tarefas(tarefas)
+            self.retornos_event.set()             
+
+        self.retornos = None
+        self.tarefas_thread = threading.Thread(target=executar_tarefas)
         self.tarefas_thread.daemon = True  
         self.tarefas_thread.start()
-    
+        return self.obter_retornos()        
+        
+    def obter_retornos(self):
+        self.retornos_event.wait() 
+        return self.retornos if self.retornos else None
+
     def realiza_tarefas(self, tarefas:list):   
+        retornos = []
         self.rodando = True      
         dicionario_acoes = {
             'pesquisa_contato': self.api.pesquisa_usuario,
@@ -28,10 +40,17 @@ class Tarefas():
             acao = dicionario_acoes[tarefa[0]]
             parametros = tarefa[1:]   
 
-            retorno = acao(*parametros)    
-            if retorno == "Número de telefone não encontrado.":
-                print(retorno, "Parando a execução...")                
-                self.somente_contato = True               
-            elif retorno:
-                print(retorno)  
-        self.rodando = False
+            resultado = acao(*parametros)
+            if resultado is not None:
+                retorno, identificador = resultado
+            else:
+                retorno, identificador = None, None
+            if retorno == "Número de telefone não encontrado.":                           
+                self.somente_contato = True  
+                retornos_atual = [retorno, identificador] 
+                retornos.append(retornos_atual)           
+            elif retorno:                
+                retornos_atual = [retorno, identificador] 
+                retornos.append(retornos_atual)                 
+        self.rodando = False        
+        return retornos if retornos else None, None

@@ -1,4 +1,5 @@
 import os
+import threading
 from backend.gerenciamento_tarefas import Tarefas
 
 class Principal():
@@ -62,8 +63,7 @@ QPushButton:hover{{
             self.ui.botao_executar.setEnabled(False)
     
     def conecta_botoes(self):        
-        self.ui.botao_remove_item.clicked.connect(lambda: self.remove_item())
-        self.ui.botao_executar.clicked.connect(lambda: self.envia_mensagens())
+        self.ui.botao_remove_item.clicked.connect(lambda: self.remove_item())        
                 
     def adiciona_itens(self, item):
         self.ui.acoes.addItem(item)
@@ -78,10 +78,15 @@ QPushButton:hover{{
             self.atualiza_estado_botao()
         
     def envia_mensagens(self):
-        numeros = self.coleta_numeros()
-        mensagens = self.coleta_mensagens()   
-        tarefas = self.gera_tarefas(numeros, mensagens)
-        self.tarefas.gerencia_tarefas_segundo_plano(tarefas)
+        if not self.tarefas.rodando:
+            self.tarefas_event = threading.Event()
+            numeros = self.coleta_numeros()
+            mensagens = self.coleta_mensagens()   
+            tarefas = self.gera_tarefas(numeros, mensagens)
+            self.erros = self.tarefas.gerencia_tarefas_segundo_plano(tarefas)
+            self.tarefas_event.set()
+            
+            return self.erros if self.erros else None
         
     def coleta_numeros(self):
         numeros = []    
