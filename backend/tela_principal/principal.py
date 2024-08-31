@@ -7,8 +7,10 @@ class Principal():
         self.ui = ui
         self.api = api
         self.tarefas = Tarefas(self.api)
+        self.arquivo_acoes = os.path.join(os.getenv("APPDATA"), "API WhatsApp", "acoes.txt")
         self.verifica_conexao()
         self.verifica_contatos()
+        self.verifica_acoes_existentes()
         self.atualiza_estado_botao()
         self.conecta_botoes()
     
@@ -56,7 +58,17 @@ QPushButton:hover{{
 }}
 """)
     
-    def atualiza_estado_botao(self):   
+    def verifica_acoes_existentes(self):
+        if os.path.isfile(self.arquivo_acoes):           
+            with open(self.arquivo_acoes, 'r') as arquivo:                
+                for linha in arquivo.readlines():  
+                    if linha:  
+                        if "\n" in linha:
+                            linha = linha.replace("\n", "")                        
+                        self.adiciona_itens(linha) 
+    
+    def atualiza_estado_botao(self):  
+        self.salva_acoes() 
         if self.api.conectado and self.contatos_selecionados and self.ui.acoes.count() > 0:
             self.ui.botao_executar.setEnabled(True)
         else:
@@ -66,8 +78,20 @@ QPushButton:hover{{
         self.ui.botao_remove_item.clicked.connect(lambda: self.remove_item())        
                 
     def adiciona_itens(self, item):
-        self.ui.acoes.addItem(item)
-        self.atualiza_estado_botao()
+        mensagem = f"""Mensagem
+{item}"""
+        self.ui.acoes.addItem(mensagem)
+        self.atualiza_estado_botao()        
+        
+        
+    def salva_acoes(self):
+        mensagens = self.coleta_mensagens()        
+        with open(self.arquivo_acoes, "w") as arquivo:  
+            for i, mensagem in enumerate(mensagens):
+                if i != 0:
+                    arquivo.write(f"\n{mensagem}")
+                else:
+                    arquivo.write(f"{mensagem}")
     
     def remove_item(self):
         item = self.ui.acoes.currentItem()
@@ -100,9 +124,9 @@ QPushButton:hover{{
         mensagens = []        
         for i in range(self.ui.acoes.count()):
             item = self.ui.acoes.item(i)
-            if item:
-                texto = item.text()
-                mensagem = texto.split("\n")[-1]
+            if item:                
+                texto = item.text()  
+                mensagem = texto.split("\n")[1]
                 mensagens.append(mensagem)
         return mensagens    
     

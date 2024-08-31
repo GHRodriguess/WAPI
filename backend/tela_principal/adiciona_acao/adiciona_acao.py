@@ -11,9 +11,8 @@ class Adiciona_Acao():
         self.ui.botao_adicionar.clicked.connect(lambda: self.adicionar())
         
     def adicionar(self):
-        mensagem = self.ui.mensagem.text()
-        self.backend.adiciona_itens(f"""Mensagem
-{mensagem}""")
+        mensagem = self.ui.mensagem.text().strip()
+        self.backend.adiciona_itens(mensagem)
         self.janela.close()
         
         
