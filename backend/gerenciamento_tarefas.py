@@ -48,9 +48,9 @@ class Tarefas():
             if retorno == "Número de telefone não encontrado.":                           
                 self.somente_contato = True  
                 retornos_atual = [retorno, identificador] 
-                retornos.append(retornos_atual)           
+                retornos.extend(retornos_atual)           
             elif retorno:                
                 retornos_atual = [retorno, identificador] 
-                retornos.append(retornos_atual)                 
+                retornos.extend(retornos_atual)                 
         self.rodando = False        
         return retornos if retornos else None, None

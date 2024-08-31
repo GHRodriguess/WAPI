@@ -100,7 +100,7 @@ class WhatsApp:
             self.contato_confianca = self.obtem_contato_confianca()              
             self.pesquisa_usuario(self.contato_confianca)            
             retorno = self.envia_mensagem(identificador, click=True)            
-            return retorno, identificador if retorno else None, None
+            return retorno, identificador if retorno else None
             
     def verifica_se_existe_contato(self, identificador):        
         try:
