@@ -77,10 +77,8 @@ class App(QtWidgets.QMainWindow):
 
     def processa_resultados(self):         
         if self.resultados:
-            if self.resultados is not None:
-                for retorno in self.resultados:
-                    if retorno is not None and isinstance(retorno, (list, tuple)) and len(retorno) >= 2:                         
-                        self.telas.carrega_telas(tela=Ui_Tela_Erros, segunda_tela=True, backend=Erros, parametros=["propria_janela", self.backend], tela_cheia=True)                        
+            if self.resultados is not None:                                                    
+                    self.telas.carrega_telas(tela=Ui_Tela_Erros, segunda_tela=True, backend=Erros, parametros=["propria_janela", self.backend], tela_cheia=True)                        
 
     def carrega_tela_conexao(self):
         self.telas.carrega_telas(tela=Ui_Tela_Conexao, backend=Conexao,parametros=self.api)

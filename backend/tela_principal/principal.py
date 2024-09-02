@@ -6,8 +6,9 @@ class Principal():
     def __init__(self, ui, api):
         self.ui = ui
         self.api = api
-        self.tarefas = Tarefas(self.api)
+        self.tarefas = Tarefas(self.api)        
         self.arquivo_acoes = os.path.join(os.getenv("APPDATA"), "API WhatsApp", "acoes.txt")
+        self.arquivo_erros = os.path.join(os.getenv("APPDATA"), "API WhatsApp", "erros.txt")
         self.verifica_conexao()
         self.verifica_contatos()
         self.verifica_acoes_existentes()
@@ -92,6 +93,30 @@ QPushButton:hover{{
                     arquivo.write(f"\n{mensagem}")
                 else:
                     arquivo.write(f"{mensagem}")
+                
+    def salva_erros(self):         
+        if self.erros:            
+            self.erros = self.erros[0] 
+            if self.erros is not None:                                                 
+                with open(self.arquivo_erros, 'w') as arquivo:
+                    contagem_erros = 0
+                    for i in range(0, len(self.erros), 2):
+                        erro = self.erros[i]                        
+                        if erro is not None:
+                            e = erro
+                            numero = self.erros[i + 1]                            
+                            if contagem_erros != 0:                                      
+                                arquivo.write(f"\n{e}, {numero}")
+                            else:
+                                arquivo.write(f"{e}, {numero}")
+                            contagem_erros += 1
+                
+    def le_erros(self):
+        if os.path.isfile(self.arquivo_erros):
+            with open(self.arquivo_erros, 'r') as arquivo:
+                return arquivo.read().splitlines()
+        else:
+            return None
     
     def remove_item(self):
         item = self.ui.acoes.currentItem()
@@ -108,6 +133,7 @@ QPushButton:hover{{
             mensagens = self.coleta_mensagens()   
             tarefas = self.gera_tarefas(numeros, mensagens)
             self.erros = self.tarefas.gerencia_tarefas_segundo_plano(tarefas)
+            self.salva_erros()
             self.tarefas_event.set()
             
             return self.erros if self.erros else None

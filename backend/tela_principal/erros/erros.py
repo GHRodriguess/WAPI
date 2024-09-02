@@ -6,11 +6,10 @@ class Erros():
         self.pega_erros()
         
     def pega_erros(self):
-        if self.backend.erros:
-            erros = self.backend.erros
-            if erros is not None:
-                for erro in erros:
-                    if isinstance(erro, (list, tuple)) and len(erro) >= 2:
-                        e = erro[0]
-                        numero = erro[1]
-                        self.ui.erros.addItem(f"Erro: {e}; Número: {numero}")
+        erros = self.backend.le_erros()        
+        if erros:                          
+            for erro in erros:  
+                e, numero = erro.split(",")
+                self.ui.erros.addItem(f"Erro: {e}; Número: {numero}")
+        else:
+            print("sem erros")
