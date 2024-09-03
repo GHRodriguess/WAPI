@@ -13,24 +13,20 @@ class Gerenciamento_Telas(QtWidgets.QWidget):
                 altura = self.app.height()               
             else: 
                 largura = dimensoes[0]
-                altura = dimensoes[1]
-            
+                altura = dimensoes[1]            
             self.ui = tela()
             self.ui.setupUi(self.app)        
-            self.app.resize(largura, altura)
-            
+            self.app.resize(largura, altura)            
             if tela_cheia:
-                self.app.showMaximized()
-                
+                self.app.showMaximized()                
             if backend:
                 if parametros:
-                    if parametros == 'propria_janela':                        
-                        self.backend_2 = backend(self.ui, self.app)
-                    else: 
-                        self.backend = backend(self.ui, parametros)  
+                    if 'propria_janela' in parametros:
+                        index = parametros.index('propria_janela')
+                        parametros[index] = self.app                        
+                    self.backend = backend(self.ui, *parametros)
                 else:
-                    self.backend = backend(self.ui)         
-                    
+                    self.backend = backend(self.ui)                             
         else:
             self.app2 = QtWidgets.QWidget()
             if dimensoes is None:
@@ -38,24 +34,19 @@ class Gerenciamento_Telas(QtWidgets.QWidget):
                 altura = self.app2.height()
             else:
                 largura = dimensoes[0]
-                altura = dimensoes[1]
-                
+                altura = dimensoes[1]                
             self.ui_2 = tela()
             self.ui_2.setupUi(self.app2)
             self.app2.resize(largura, altura)
-            self.app2.show()
-            
-            self.app2.setAttribute(QtCore.Qt.WA_DeleteOnClose)            
-            
+            self.app2.show()            
+            self.app2.setAttribute(QtCore.Qt.WA_DeleteOnClose)
             if tela_cheia:
-                self.app2.showMaximized()
-                
+                self.app2.showMaximized()                
             if backend:
                 if parametros:
                     if 'propria_janela' in parametros: 
                         index = parametros.index('propria_janela')    
                         parametros[index] = self.app2                   
                     self.backend_2 = backend(self.ui_2, *parametros) 
-
                 else:
                     self.backend_2 = backend(self.ui_2)

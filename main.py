@@ -37,8 +37,7 @@ class App(QtWidgets.QMainWindow):
 
     def closeEvent(self, event):  
         event.accept()        
-        QTimer.singleShot(1, self.fecha_navegador)
-        
+        QTimer.singleShot(1, self.fecha_navegador)        
 
     def configura_diretorio_aplicacao(self):
         diretorio = os.path.join(os.getenv('APPDATA'), 'API WhatsApp')
@@ -51,9 +50,9 @@ class App(QtWidgets.QMainWindow):
     
     def carrega_tela_principal(self, primeira_vez=False):
         if primeira_vez:
-            self.telas.carrega_telas(tela=Ui_Tela_Principal, backend=Principal, tela_cheia=True,parametros=self.api)
+            self.telas.carrega_telas(tela=Ui_Tela_Principal, backend=Principal, tela_cheia=True,parametros=[self.api])
         else:            
-            self.telas.carrega_telas(tela=Ui_Tela_Principal, backend=Principal, parametros=self.api)
+            self.telas.carrega_telas(tela=Ui_Tela_Principal, backend=Principal, parametros=[self.api])
         
         self.ui = self.telas.ui
         self.backend = self.telas.backend
@@ -81,7 +80,7 @@ class App(QtWidgets.QMainWindow):
                     self.telas.carrega_telas(tela=Ui_Tela_Erros, segunda_tela=True, backend=Erros, parametros=["propria_janela", self.backend], tela_cheia=True)                        
 
     def carrega_tela_conexao(self):
-        self.telas.carrega_telas(tela=Ui_Tela_Conexao, backend=Conexao,parametros=self.api)
+        self.telas.carrega_telas(tela=Ui_Tela_Conexao, backend=Conexao,parametros=[self.api])
         self.ui = self.telas.ui
         self.backend = self.telas.backend
         self.ui.botao_home.clicked.connect(self.carrega_tela_principal)
@@ -90,7 +89,7 @@ class App(QtWidgets.QMainWindow):
         self.backend.verifica_conexao()
         
     def carrega_tela_contatos(self):
-        self.telas.carrega_telas(tela=Ui_Tela_Contatos, backend=Contatos,parametros=self.api)
+        self.telas.carrega_telas(tela=Ui_Tela_Contatos, backend=Contatos,parametros=[self.api])
         self.ui = self.telas.ui
         self.backend = self.telas.backend
         self.ui.botao_home.clicked.connect(self.carrega_tela_principal)
