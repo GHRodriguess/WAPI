@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'frontend/ui/tela_principal/tela_principal.ui'
+# Form implementation generated from reading ui file 'frontend\ui\tela_principal\tela_principal.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.9
 #
@@ -236,7 +236,7 @@ class Ui_Tela_Principal(object):
         self.horizontalLayout_4.addItem(spacerItem5)
         self.botao_executar = QtWidgets.QPushButton(self.frame_5)
         self.botao_executar.setEnabled(False)
-        self.botao_executar.setMinimumSize(QtCore.QSize(125, 45))
+        self.botao_executar.setMinimumSize(QtCore.QSize(150, 45))
         font = QtGui.QFont()
         font.setFamily("Garamond")
         font.setPointSize(12)

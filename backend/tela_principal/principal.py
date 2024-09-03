@@ -70,7 +70,7 @@ QPushButton:hover{{
     
     def atualiza_estado_botao(self):  
         self.salva_acoes() 
-        if self.api.conectado and self.contatos_selecionados and self.ui.acoes.count() > 0:
+        if (self.api.conectado and self.contatos_selecionados and self.ui.acoes.count() > 0):
             self.ui.botao_executar.setEnabled(True)
         else:
             self.ui.botao_executar.setEnabled(False)

@@ -65,7 +65,9 @@ class App(QtWidgets.QMainWindow):
         self.resultados_ready.connect(self.processa_resultados) 
         self.ui.botao_executar.clicked.connect(self.executa_mensagens)
 
-    def executa_mensagens(self):        
+    def executa_mensagens(self):  
+        self.ui.botao_executar.setText("EXECUTANDO") 
+        self.ui.botao_executar.setEnabled(False)
         self.thread_envia_mensagens = threading.Thread(target=self.run_envia_mensagens)
         self.thread_envia_mensagens.start()
 
@@ -78,6 +80,8 @@ class App(QtWidgets.QMainWindow):
         if self.resultados:
             if self.resultados is not None:                                                    
                     self.telas.carrega_telas(tela=Ui_Tela_Erros, segunda_tela=True, backend=Erros, parametros=["propria_janela", self.backend], tela_cheia=True)                        
+        self.ui.botao_executar.setText("EXECUTAR") 
+        self.ui.botao_executar.setEnabled(True)
 
     def carrega_tela_conexao(self):
         self.telas.carrega_telas(tela=Ui_Tela_Conexao, backend=Conexao,parametros=[self.api])

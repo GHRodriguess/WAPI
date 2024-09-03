@@ -491,7 +491,7 @@ QListWidget::item:selected{
             </property>
             <property name="minimumSize">
              <size>
-              <width>125</width>
+              <width>150</width>
               <height>45</height>
              </size>
             </property>
