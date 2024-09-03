@@ -11,5 +11,3 @@ class Erros():
             for erro in erros:  
                 e, numero = erro.split(",")
                 self.ui.erros.addItem(f"Erro: {e}; Número: {numero}")
-        else:
-            print("sem erros")

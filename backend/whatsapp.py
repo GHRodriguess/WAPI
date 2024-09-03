@@ -153,8 +153,3 @@ class WhatsApp:
 
     def fecha_navegador(self):
         self.navegador.quit()
-        
-if __name__ == "__main__":
-    api = WhatsApp()
-    api.pesquisa_usuario("Gabriel henrique Rodrigues")
-    api.envia_mensagem("Essa mensagem foi enviada por uma API do WhatsApp.")
