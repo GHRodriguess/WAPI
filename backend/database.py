@@ -56,8 +56,7 @@ class Database:
 
     def close(self):
         if self.conn:
-            self.conn.close()
-            print(f"Conexão com o banco de dados {self.nome_banco} encerrada com sucesso.")
+            self.conn.close()            
 
     def __enter__(self):
         return self
