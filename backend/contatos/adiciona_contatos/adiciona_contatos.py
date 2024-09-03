@@ -8,7 +8,7 @@ class Adiciona_Contatos():
     def __init__(self, ui, janela, backend_contatos):
         self.ui = ui
         self.janela = janela
-        self.planilha = None
+        self.planilha_dir = None
         self.backend = backend_contatos
         self.database = Database(os.path.join(os.getenv("APPDATA"), "API WhatsApp", "database.db"))
         self.conecta_widgets()        
@@ -23,7 +23,7 @@ class Adiciona_Contatos():
     def atualiza_status_botao_salvar(self):
         nome_contato = self.ui.nome_contato.text().strip()
         numero_contato = self.ui.numero_contato.text().strip()
-        if nome_contato and numero_contato or self.planilha_dir:
+        if (nome_contato and numero_contato) or self.planilha_dir:
             self.ui.botao_adicionar.setEnabled(True)
         else:
             self.ui.botao_adicionar.setEnabled(False) 
