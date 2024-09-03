@@ -125,8 +125,8 @@ class WhatsApp:
             try: 
                 contagem = 0
                 elementos = self.navegador.find_elements(By.CLASS_NAME, "_ao3e") 
-                ultima_mensagem = [elemento.text for elemento in elementos if elemento.text][-1]
-                if mensagem == ultima_mensagem:    
+                ultimas_mensagens = [elemento.text for elemento in elementos if elemento.text][-5:]
+                if mensagem in ultimas_mensagens:    
                     if click:
                         elementos[-1].click()      
                         elemento_entrar_conversa = self.navegador.find_element(By.CLASS_NAME, "_aj-z")
