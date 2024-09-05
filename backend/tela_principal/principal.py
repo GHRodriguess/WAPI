@@ -41,6 +41,9 @@ QPushButton::hover{{
         if os.path.isfile(arquivos_marcados):
             with open(arquivos_marcados, 'r') as f:
                 self.contatos_selecionados = f.read().splitlines()
+        else:
+            self.contatos_selecionados = None
+            
         try:
             if self.contatos_selecionados:
                 texto_contato = "contatos_selecionados"
