@@ -4,6 +4,7 @@ import os
 from PyQt5.QtCore import QTimer, pyqtSignal
 import threading
 
+from frontend.py.tela_loading.tela_loading import Ui_Tela_Loading
 from frontend.py.tela_principal.tela_principal import Ui_Tela_Principal
 from frontend.py.tela_principal.adiciona_acao.adiciona_acao import Ui_Adiciona_Acao
 from frontend.py.tela_principal.erros.erros import Ui_Tela_Erros
@@ -23,18 +24,30 @@ from backend.gerenciamento_tarefas import Tarefas
 
 
 class App(QtWidgets.QMainWindow):
+    api_ready = pyqtSignal()
     resultados_ready = pyqtSignal() 
     
     def __init__(self):
         super().__init__() 
         self.configura_diretorio_aplicacao()
         self.setCentralWidget(QtWidgets.QWidget())  
-        self.centralWidget().setLayout(QtWidgets.QVBoxLayout())    
-        self.api = WhatsApp()  
-        self.telas = Gerenciamento_Telas(self)
+        self.centralWidget().setLayout(QtWidgets.QVBoxLayout()) 
+        self.telas = Gerenciamento_Telas(self)   
+        self.api_ready.connect(self.api_pronta)    
+        self.telas.carrega_telas(tela=Ui_Tela_Loading)  
+        QTimer.singleShot(1000, self.inicia_api)  
+        
+    def inicia_api(self):  
+        def roda_api():
+            self.api = WhatsApp()
+            self.api_ready.emit()             
+        self.api_thread = threading.Thread(target=roda_api)
+        self.api_thread.start()
+        
+    def api_pronta(self):
         self.tarefas = Tarefas(self.api)
-        self.carrega_tela_principal(primeira_vez=True)
-
+        self.carrega_tela_principal(primeira_vez=True)          
+        
     def closeEvent(self, event):  
         event.accept()        
         QTimer.singleShot(1, self.fecha_navegador)        
@@ -50,7 +63,7 @@ class App(QtWidgets.QMainWindow):
     
     def carrega_tela_principal(self, primeira_vez=False):
         if primeira_vez:
-            self.telas.carrega_telas(tela=Ui_Tela_Principal, backend=Principal, tela_cheia=True,parametros=[self.api])
+            self.telas.carrega_telas(tela=Ui_Tela_Principal, backend=Principal, dimensoes=(800,600),tela_cheia=True,parametros=[self.api])
         else:            
             self.telas.carrega_telas(tela=Ui_Tela_Principal, backend=Principal, parametros=[self.api])
         

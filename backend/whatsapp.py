@@ -17,7 +17,7 @@ class WhatsApp:
         self.diretorio = os.path.join(os.getenv("APPDATA"), "API WhatsApp")
         self.navegador = self.incia_navegador()
         self.database = Database(os.path.join(os.getenv("APPDATA"), "API WhatsApp", "database.db"))
-        self.wait = WebDriverWait(self.navegador, 10)              
+        self.wait = WebDriverWait(self.navegador, 10)                   
         try:
             self.verifica_conexao()
         except Exception as e:
