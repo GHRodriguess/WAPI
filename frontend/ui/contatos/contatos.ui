@@ -12,7 +12,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>848</width>
+    <width>855</width>
     <height>600</height>
    </rect>
   </property>
@@ -393,6 +393,52 @@ background-color: transparent;
 
 QPushButton::hover{
 icon: url(:/icons/adiciona_contato_hover.svg);
+background-color: transparent;
+}</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>35</width>
+              <height>35</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_8">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Fixed</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>10</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="botao_adicionar_grupo">
+            <property name="minimumSize">
+             <size>
+              <width>40</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton{
+icon: url(:/icons/adiciona_grupo.svg);
+background-color: transparent;
+}
+
+QPushButton::hover{
+icon: url(:/icons/adiciona_grupo_hover.svg);
 background-color: transparent;
 }</string>
             </property>

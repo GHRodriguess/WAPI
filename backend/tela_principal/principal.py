@@ -132,9 +132,9 @@ QPushButton:hover{{
     def envia_mensagens(self):
         if not self.tarefas.rodando:
             self.tarefas_event = threading.Event()
-            numeros = self.coleta_numeros()
+            identificadores = self.coleta_numeros()
             mensagens = self.coleta_mensagens()   
-            tarefas = self.gera_tarefas(numeros, mensagens)
+            tarefas = self.gera_tarefas(identificadores, mensagens)
             self.erros = self.tarefas.gerencia_tarefas_segundo_plano(tarefas)
             self.salva_erros()
             self.tarefas_event.set()
@@ -142,12 +142,15 @@ QPushButton:hover{{
             return self.erros if self.erros else None
         
     def coleta_numeros(self):
-        numeros = []    
+        identificadores = []    
         for item in self.contatos_selecionados:            
             nome, numero = item.split(",")
             numero = numero.strip()  
-            numeros.append(numero)
-        return numeros    
+            if numero:
+                identificadores.append(numero)
+            else:
+                identificadores.append(nome)               
+        return identificadores    
         
     def coleta_mensagens(self):
         mensagens = []        

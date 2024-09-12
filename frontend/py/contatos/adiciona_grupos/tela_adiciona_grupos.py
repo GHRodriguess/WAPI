@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'frontend\ui\contatos\adiciona_contatos\adiciona_contatos.ui'
+# Form implementation generated from reading ui file 'frontend\ui\contatos\adiciona_grupos\adiciona_grupos.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.9
 #
@@ -11,23 +11,23 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_Adiciona_Contatos(object):
-    def setupUi(self, Adiciona_Contatos):
-        Adiciona_Contatos.setObjectName("Adiciona_Contatos")
-        Adiciona_Contatos.setEnabled(True)
+class Ui_Adiciona_Grupos(object):
+    def setupUi(self, Adiciona_Grupos):
+        Adiciona_Grupos.setObjectName("Adiciona_Grupos")
+        Adiciona_Grupos.setEnabled(True)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(Adiciona_Contatos.sizePolicy().hasHeightForWidth())
-        Adiciona_Contatos.setSizePolicy(sizePolicy)
-        Adiciona_Contatos.setMinimumSize(QtCore.QSize(430, 480))
-        Adiciona_Contatos.setMaximumSize(QtCore.QSize(430, 480))
-        Adiciona_Contatos.setStyleSheet("QWidget{\n"
+        sizePolicy.setHeightForWidth(Adiciona_Grupos.sizePolicy().hasHeightForWidth())
+        Adiciona_Grupos.setSizePolicy(sizePolicy)
+        Adiciona_Grupos.setMinimumSize(QtCore.QSize(430, 480))
+        Adiciona_Grupos.setMaximumSize(QtCore.QSize(430, 480))
+        Adiciona_Grupos.setStyleSheet("QWidget{\n"
 "background-color: rgb(50,50,50);\n"
 "}")
-        self.verticalLayout = QtWidgets.QVBoxLayout(Adiciona_Contatos)
+        self.verticalLayout = QtWidgets.QVBoxLayout(Adiciona_Grupos)
         self.verticalLayout.setObjectName("verticalLayout")
-        self.frame = QtWidgets.QFrame(Adiciona_Contatos)
+        self.frame = QtWidgets.QFrame(Adiciona_Grupos)
         self.frame.setMinimumSize(QtCore.QSize(0, 75))
         self.frame.setMaximumSize(QtCore.QSize(16777215, 75))
         self.frame.setStyleSheet("QFrame {\n"
@@ -49,7 +49,7 @@ class Ui_Adiciona_Contatos(object):
         self.label.setObjectName("label")
         self.horizontalLayout.addWidget(self.label)
         self.verticalLayout.addWidget(self.frame)
-        self.frame_2 = QtWidgets.QFrame(Adiciona_Contatos)
+        self.frame_2 = QtWidgets.QFrame(Adiciona_Grupos)
         self.frame_2.setStyleSheet("QFrame {\n"
 "background-color: rgb(70,70,70);\n"
 "border-radius: 20px;\n"
@@ -66,26 +66,26 @@ class Ui_Adiciona_Contatos(object):
         self.frame_6.setObjectName("frame_6")
         self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.frame_6)
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
-        self.botao_adicionar_grupo = QtWidgets.QPushButton(self.frame_6)
-        self.botao_adicionar_grupo.setMinimumSize(QtCore.QSize(40, 40))
+        self.botao_adicionar_contato = QtWidgets.QPushButton(self.frame_6)
+        self.botao_adicionar_contato.setMinimumSize(QtCore.QSize(40, 40))
         font = QtGui.QFont()
         font.setFamily("Garamond")
         font.setPointSize(12)
         font.setBold(True)
-        self.botao_adicionar_grupo.setFont(font)
-        self.botao_adicionar_grupo.setStyleSheet("QPushButton{\n"
-"icon: url(:/icons/adiciona_grupo.svg);\n"
+        self.botao_adicionar_contato.setFont(font)
+        self.botao_adicionar_contato.setStyleSheet("QPushButton{\n"
+"icon: url(:/icons/adiciona_contato.svg);\n"
 "background-color: transparent;\n"
 "}\n"
 "\n"
 "QPushButton::hover{\n"
-"icon: url(:/icons/adiciona_grupo_hover.svg);\n"
+"icon: url(:/icons/adiciona_contato_hover.svg);\n"
 "background-color: transparent;\n"
 "}")
-        self.botao_adicionar_grupo.setText("")
-        self.botao_adicionar_grupo.setIconSize(QtCore.QSize(40, 40))
-        self.botao_adicionar_grupo.setObjectName("botao_adicionar_grupo")
-        self.horizontalLayout_4.addWidget(self.botao_adicionar_grupo, 0, QtCore.Qt.AlignLeft)
+        self.botao_adicionar_contato.setText("")
+        self.botao_adicionar_contato.setIconSize(QtCore.QSize(40, 40))
+        self.botao_adicionar_contato.setObjectName("botao_adicionar_contato")
+        self.horizontalLayout_4.addWidget(self.botao_adicionar_contato, 0, QtCore.Qt.AlignLeft)
         spacerItem = QtWidgets.QSpacerItem(10, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_4.addItem(spacerItem)
         self.botao_inserir_planilha = QtWidgets.QPushButton(self.frame_6)
@@ -142,37 +142,8 @@ class Ui_Adiciona_Contatos(object):
 "padding: 10px")
         self.nome.setObjectName("nome")
         self.verticalLayout_3.addWidget(self.nome)
-        spacerItem3 = QtWidgets.QSpacerItem(10, 10, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        spacerItem3 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout_3.addItem(spacerItem3)
-        self.numero_contato = QtWidgets.QLineEdit(self.frame_4)
-        self.numero_contato.setMinimumSize(QtCore.QSize(0, 50))
-        font = QtGui.QFont()
-        font.setFamily("Garamond")
-        font.setPointSize(12)
-        font.setBold(True)
-        self.numero_contato.setFont(font)
-        self.numero_contato.setStyleSheet("background-color: rgb(60,60,60);\n"
-"color: rgb(255,255,255);\n"
-"border-radius: 15px;\n"
-"padding: 10px")
-        self.numero_contato.setObjectName("numero_contato")
-        self.verticalLayout_3.addWidget(self.numero_contato)
-        spacerItem4 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
-        self.verticalLayout_3.addItem(spacerItem4)
-        self.contato_confianca = QtWidgets.QCheckBox(self.frame_4)
-        font = QtGui.QFont()
-        font.setFamily("Garamond")
-        font.setPointSize(10)
-        font.setBold(True)
-        self.contato_confianca.setFont(font)
-        self.contato_confianca.setStyleSheet("QCheckBox{\n"
-"color: rgb(255,255,255);\n"
-"background-color: transparent\n"
-"}")
-        self.contato_confianca.setObjectName("contato_confianca")
-        self.verticalLayout_3.addWidget(self.contato_confianca)
-        spacerItem5 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.verticalLayout_3.addItem(spacerItem5)
         self.verticalLayout_2.addWidget(self.frame_4)
         self.frame_5 = QtWidgets.QFrame(self.frame_2)
         self.frame_5.setMinimumSize(QtCore.QSize(0, 45))
@@ -182,8 +153,8 @@ class Ui_Adiciona_Contatos(object):
         self.frame_5.setObjectName("frame_5")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.frame_5)
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
-        spacerItem6 = QtWidgets.QSpacerItem(121, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_3.addItem(spacerItem6)
+        spacerItem4 = QtWidgets.QSpacerItem(121, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_3.addItem(spacerItem4)
         self.botao_cancelar = QtWidgets.QPushButton(self.frame_5)
         self.botao_cancelar.setEnabled(True)
         self.botao_cancelar.setMinimumSize(QtCore.QSize(120, 35))
@@ -241,18 +212,16 @@ class Ui_Adiciona_Contatos(object):
         self.verticalLayout_2.addWidget(self.frame_5)
         self.verticalLayout.addWidget(self.frame_2)
 
-        self.retranslateUi(Adiciona_Contatos)
-        QtCore.QMetaObject.connectSlotsByName(Adiciona_Contatos)
+        self.retranslateUi(Adiciona_Grupos)
+        QtCore.QMetaObject.connectSlotsByName(Adiciona_Grupos)
 
-    def retranslateUi(self, Adiciona_Contatos):
+    def retranslateUi(self, Adiciona_Grupos):
         _translate = QtCore.QCoreApplication.translate
-        Adiciona_Contatos.setWindowTitle(_translate("Adiciona_Contatos", "Adiciona Contatos"))
-        self.label.setText(_translate("Adiciona_Contatos", "<html><head/><body><p><span style=\" color:#ffffff;\">ADICIONA CONTATO</span></p></body></html>"))
-        self.botao_inserir_planilha.setText(_translate("Adiciona_Contatos", "PLANILHA"))
-        self.label_2.setText(_translate("Adiciona_Contatos", "<html><head/><body><p><span style=\" color:#ffffff;\">NOME E NÚMERO DE TELEFONE</span></p></body></html>"))
-        self.nome.setPlaceholderText(_translate("Adiciona_Contatos", "Adicione o nome aqui"))
-        self.numero_contato.setPlaceholderText(_translate("Adiciona_Contatos", "Adicione o número aqui"))
-        self.contato_confianca.setText(_translate("Adiciona_Contatos", "SALVAR COMO CONTATO DE CONFIANÇA"))
-        self.botao_cancelar.setText(_translate("Adiciona_Contatos", "CANCELAR"))
-        self.botao_adicionar.setText(_translate("Adiciona_Contatos", "ADICIONAR"))
-import frontend.ui.contatos.adiciona_contatos.icons_rc as icons_rc
+        Adiciona_Grupos.setWindowTitle(_translate("Adiciona_Grupos", "Adiciona Grupos"))
+        self.label.setText(_translate("Adiciona_Grupos", "<html><head/><body><p><span style=\" color:#ffffff;\">ADICIONA GRUPO</span></p></body></html>"))
+        self.botao_inserir_planilha.setText(_translate("Adiciona_Grupos", "PLANILHA"))
+        self.label_2.setText(_translate("Adiciona_Grupos", "<html><head/><body><p><span style=\" color:#ffffff;\">INSIRA O NOME DO GRUPO</span></p></body></html>"))
+        self.nome.setPlaceholderText(_translate("Adiciona_Grupos", "Adicione o nome aqui"))
+        self.botao_cancelar.setText(_translate("Adiciona_Grupos", "CANCELAR"))
+        self.botao_adicionar.setText(_translate("Adiciona_Grupos", "ADICIONAR"))
+import frontend.ui.contatos.adiciona_grupos.icons_rc as icons_rc

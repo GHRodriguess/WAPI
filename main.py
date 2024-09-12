@@ -11,6 +11,7 @@ from frontend.py.tela_principal.erros.erros import Ui_Tela_Erros
 from frontend.py.conexao.tela_conexao import Ui_Tela_Conexao
 from frontend.py.contatos.tela_contatos import Ui_Tela_Contatos
 from frontend.py.contatos.adiciona_contatos.tela_adiciona_contatos import Ui_Adiciona_Contatos
+from frontend.py.contatos.adiciona_grupos.tela_adiciona_grupos import Ui_Adiciona_Grupos
 
 from backend.gerenciamento_telas import Gerenciamento_Telas
 from backend.whatsapp import WhatsApp
@@ -19,7 +20,7 @@ from backend.tela_principal.adiciona_acao.adiciona_acao import Adiciona_Acao
 from backend.tela_principal.erros.erros import Erros
 from backend.conexao.conexao import Conexao
 from backend.contatos.contatos import Contatos
-from backend.contatos.adiciona_contatos.adiciona_contatos import Adiciona_Contatos
+from backend.contatos.adiciona_contatos_grupos.adiciona_contatos_grupos import Adiciona_Contatos_Grupos
 from backend.gerenciamento_tarefas import Tarefas
 
 
@@ -93,8 +94,11 @@ class App(QtWidgets.QMainWindow):
         if self.resultados:
             if self.resultados is not None:                                                    
                     self.telas.carrega_telas(tela=Ui_Tela_Erros, segunda_tela=True, backend=Erros, parametros=["propria_janela", self.backend], tela_cheia=True)                        
-        self.ui.botao_executar.setText("EXECUTAR") 
-        self.ui.botao_executar.setEnabled(True)
+        try:
+            self.ui.botao_executar.setText("EXECUTAR") 
+            self.ui.botao_executar.setEnabled(True)
+        except:
+            pass
 
     def carrega_tela_conexao(self):
         self.telas.carrega_telas(tela=Ui_Tela_Conexao, backend=Conexao,parametros=[self.api])
@@ -112,12 +116,29 @@ class App(QtWidgets.QMainWindow):
         self.ui.botao_home.clicked.connect(self.carrega_tela_principal)
         self.ui.botao_contatos.clicked.connect(self.carrega_tela_contatos)        
         self.ui.botao_conexao.clicked.connect(self.carrega_tela_conexao)        
-        self.ui.botao_adicionar_contato.clicked.connect(lambda: self.telas.carrega_telas(tela=Ui_Adiciona_Contatos, segunda_tela=True, backend=Adiciona_Contatos, parametros=["propria_janela", self.backend]))
+        self.ui.botao_adicionar_contato.clicked.connect(lambda: self.carrega_tela_adiciona_contatos_grupos('contato'))
+        self.ui.botao_adicionar_grupo.clicked.connect(lambda: self.carrega_tela_adiciona_contatos_grupos('grupo'))        
         self.backend.verifica_conexao()
         self.backend.rodando()
 
+    def carrega_tela_adiciona_contatos_grupos(self, tipo):
+        try:
+            self.telas.backend_2.fecha_janela()
+        except:
+            pass
+        if tipo == "contato":
+            self.telas.carrega_telas(tela=Ui_Adiciona_Contatos, segunda_tela=True, backend=Adiciona_Contatos_Grupos, parametros=["propria_janela", self.backend, tipo])
+            self.telas.ui_2.botao_adicionar_grupo.clicked.connect(lambda: self.carrega_tela_adiciona_contatos_grupos('grupo'))
+        elif tipo == 'grupo':
+            self.telas.carrega_telas(tela=Ui_Adiciona_Grupos, segunda_tela=True, backend=Adiciona_Contatos_Grupos, parametros=["propria_janela", self.backend, tipo])
+            self.telas.ui_2.botao_adicionar_contato.clicked.connect(lambda: self.carrega_tela_adiciona_contatos_grupos('contato'))
+        
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
     window = App()
     window.show()
     sys.exit(app.exec())
+    try:
+        window.fecha_navegador()
+    except:
+        pass

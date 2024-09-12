@@ -1,0 +1,7 @@
+<RCC>
+  <qresource>
+    <file>icons/tabela.svg</file>
+    <file>icons/adiciona_contato.svg</file>
+    <file>icons/adiciona_contato_hover.svg</file>
+  </qresource>
+</RCC>

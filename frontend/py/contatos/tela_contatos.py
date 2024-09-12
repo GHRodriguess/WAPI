@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'frontend/ui/contatos/contatos.ui'
+# Form implementation generated from reading ui file 'frontend\ui\contatos\contatos.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.9
 #
@@ -15,7 +15,7 @@ class Ui_Tela_Contatos(object):
     def setupUi(self, Tela_Contatos):
         Tela_Contatos.setObjectName("Tela_Contatos")
         Tela_Contatos.setWindowModality(QtCore.Qt.NonModal)
-        Tela_Contatos.setEnabled(True)        
+        Tela_Contatos.setEnabled(True)
         Tela_Contatos.setMouseTracking(False)
         Tela_Contatos.setFocusPolicy(QtCore.Qt.NoFocus)
         Tela_Contatos.setStyleSheet("QMainWindow{\n"
@@ -189,6 +189,23 @@ class Ui_Tela_Contatos(object):
         self.botao_adicionar_contato.setIconSize(QtCore.QSize(35, 35))
         self.botao_adicionar_contato.setObjectName("botao_adicionar_contato")
         self.horizontalLayout_2.addWidget(self.botao_adicionar_contato)
+        spacerItem6 = QtWidgets.QSpacerItem(10, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_2.addItem(spacerItem6)
+        self.botao_adicionar_grupo = QtWidgets.QPushButton(self.frame_3)
+        self.botao_adicionar_grupo.setMinimumSize(QtCore.QSize(40, 40))
+        self.botao_adicionar_grupo.setStyleSheet("QPushButton{\n"
+"icon: url(:/icons/adiciona_grupo.svg);\n"
+"background-color: transparent;\n"
+"}\n"
+"\n"
+"QPushButton::hover{\n"
+"icon: url(:/icons/adiciona_grupo_hover.svg);\n"
+"background-color: transparent;\n"
+"}")
+        self.botao_adicionar_grupo.setText("")
+        self.botao_adicionar_grupo.setIconSize(QtCore.QSize(35, 35))
+        self.botao_adicionar_grupo.setObjectName("botao_adicionar_grupo")
+        self.horizontalLayout_2.addWidget(self.botao_adicionar_grupo)
         self.verticalLayout_2.addWidget(self.frame_3)
         self.frame_4 = QtWidgets.QFrame(self.frame_2)
         self.frame_4.setFrameShape(QtWidgets.QFrame.StyledPanel)
@@ -211,8 +228,8 @@ class Ui_Tela_Contatos(object):
         self.label_2.setFont(font)
         self.label_2.setObjectName("label_2")
         self.horizontalLayout_3.addWidget(self.label_2)
-        spacerItem6 = QtWidgets.QSpacerItem(290, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_3.addItem(spacerItem6)
+        spacerItem7 = QtWidgets.QSpacerItem(290, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_3.addItem(spacerItem7)
         self.selecionar_tudo = QtWidgets.QPushButton(self.frame_5)
         self.selecionar_tudo.setMinimumSize(QtCore.QSize(150, 35))
         font = QtGui.QFont()

@@ -1,5 +1,7 @@
 <RCC>
   <qresource>
+    <file>icons/adiciona_grupo.svg</file>
+    <file>icons/adiciona_grupo_hover.svg</file>
     <file>icons/tabela.svg</file>
   </qresource>
 </RCC>

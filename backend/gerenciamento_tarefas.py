@@ -44,7 +44,7 @@ class Tarefas():
             if resultado is not None:
                 retorno, identificador = resultado
             else:
-                retorno, identificador = None, None
+                retorno, identificador = None, None            
             if retorno == "Número de telefone não encontrado.":                           
                 self.somente_contato = True  
                 retornos_atual = [retorno, identificador] 
