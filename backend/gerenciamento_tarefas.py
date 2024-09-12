@@ -40,17 +40,18 @@ class Tarefas():
             acao = dicionario_acoes[tarefa[0]]
             parametros = tarefa[1:]   
 
-            resultado = acao(*parametros)
+            resultado = acao(*parametros)            
             if resultado is not None:
                 retorno, identificador = resultado
             else:
-                retorno, identificador = None, None            
-            if retorno == "Número de telefone não encontrado.":                           
-                self.somente_contato = True  
-                retornos_atual = [retorno, identificador] 
-                retornos.extend(retornos_atual)           
-            elif retorno:                
-                retornos_atual = [retorno, identificador] 
-                retornos.extend(retornos_atual)                 
+                retorno, identificador = None, None  
+            if retorno:                     
+                if "Número de telefone não encontrado." in retorno:                           
+                    self.somente_contato = True  
+                    retornos_atual = [retorno, identificador] 
+                    retornos.extend(retornos_atual)           
+                elif retorno:                
+                    retornos_atual = [retorno, identificador] 
+                    retornos.extend(retornos_atual)                 
         self.rodando = False        
         return retornos if retornos else None, None

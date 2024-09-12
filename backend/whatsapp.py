@@ -86,7 +86,7 @@ class WhatsApp:
         else:    
             self.conectado = False
             
-    def pesquisa_usuario(self, identificador, pesquisa_por_contato_confianca:int=0): 
+    def pesquisa_usuario(self, identificador, pesquisa_por_contato_confianca:bool=False): 
         elemento = self.wait.until(EC. presence_of_element_located((By.CLASS_NAME, 'selectable-text'))) 
         pesquisa = elemento.text        
         if pesquisa: 
@@ -96,16 +96,19 @@ class WhatsApp:
         elemento = self.navegador.find_element(By.CLASS_NAME, "selectable-text")
         elemento.send_keys(identificador, Keys.ENTER)
         tem_contato = self.verifica_se_existe_contato(identificador)          
-        if not tem_contato:
-            if pesquisa_por_contato_confianca > 2:
-                return "Número de telefone não encontrado.", identificador 
+        if not tem_contato: 
+            if pesquisa_por_contato_confianca:                
+                return "Número de telefone não encontrado. Contato de confiança não encontrado.", identificador 
             self.contato_confianca = self.obtem_contato_confianca() 
             if self.contato_confianca:  
                 e_num = self.verifica_e_contato(identificador)                
                 if e_num:
-                    self.pesquisa_usuario(self.contato_confianca, pesquisa_por_contato_confianca=pesquisa_por_contato_confianca + 1)            
-                    retorno = self.envia_mensagem(identificador, click=True)            
-                    return retorno, identificador if retorno else None
+                    info_contato_confianca = self.pesquisa_usuario(self.contato_confianca, pesquisa_por_contato_confianca=True)            
+                    if not info_contato_confianca:
+                        retorno = self.envia_mensagem(identificador, click=True)            
+                        return retorno, identificador if retorno else None
+                    else:                        
+                        return info_contato_confianca[0], identificador
                 else:
                     return "Número de telefone não encontrado.", identificador 
             else:
