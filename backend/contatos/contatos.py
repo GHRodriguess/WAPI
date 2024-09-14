@@ -97,13 +97,13 @@ QPushButton::hover{{
         self.conecta_botoes() 
         self.busca = QSortFilterProxyModel()
         self.busca.setSourceModel(self.model)
-        self.busca.setFilterKeyColumn(1)
+        self.busca.setFilterKeyColumn(-1)
         self.busca.setFilterCaseSensitivity(Qt.CaseInsensitive)
         
         self.ui.procura.textChanged.connect(lambda: self.filtra_planilha(self.ui.procura.text()))
         
     def filtra_planilha(self, busca):        
-        reg_exp = QRegularExpression(busca)
+        reg_exp = QRegularExpression(busca, QRegularExpression.CaseInsensitiveOption)
         self.busca.setFilterRegularExpression(reg_exp)
         self.ui.tabela.setModel(self.busca)
         
