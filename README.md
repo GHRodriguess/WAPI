@@ -1,4 +1,11 @@
-# WAPI
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/3c66ebdf-dddb-48e8-832c-366a0a008f9d" alt="icone - wapi 256" width="256"/>
+</div>
+
+<h1 style="display: flex; align-items: center;">  
+  <img src="https://github.com/user-attachments/assets/3c66ebdf-dddb-48e8-832c-366a0a008f9d" alt="icone - wapi 256" width="35" style="margin-right: 30px;"/>
+  WAPI
+</h1>
 
 ## ÍNDICE 
 
