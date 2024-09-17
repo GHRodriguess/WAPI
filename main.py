@@ -40,7 +40,11 @@ class App(QtWidgets.QMainWindow):
         
     def inicia_api(self):  
         def roda_api():
-            self.api = WhatsApp()
+            try:
+                self.api = WhatsApp()
+            except Exception as e:                
+                os.system("taskkill /f /im chrome.exe")                
+                roda_api()
             self.api_ready.emit()             
         self.api_thread = threading.Thread(target=roda_api)
         self.api_thread.start()
@@ -49,7 +53,7 @@ class App(QtWidgets.QMainWindow):
         self.tarefas = Tarefas(self.api)
         self.carrega_tela_principal(primeira_vez=True)          
         
-    def closeEvent(self, event):  
+    def closeEvent(self, event):         
         event.accept()        
         QTimer.singleShot(1, self.fecha_navegador)        
 
@@ -58,9 +62,9 @@ class App(QtWidgets.QMainWindow):
         if not os.path.exists(diretorio):
             os.makedirs(diretorio)
 
-    def fecha_navegador(self):
-        if hasattr(self, 'api') and self.api:
-            self.api.fecha_navegador()
+    def fecha_navegador(self):        
+        if hasattr(self, 'api') and self.api:            
+            self.api.fecha_navegador()  
     
     def carrega_tela_principal(self, primeira_vez=False):
         if primeira_vez:
@@ -137,8 +141,4 @@ if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
     window = App()
     window.show()
-    sys.exit(app.exec())
-    try:
-        window.fecha_navegador()
-    except:
-        pass
+    sys.exit(app.exec())    
